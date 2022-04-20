@@ -15,19 +15,21 @@ public class Main extends AppCompatActivity {
     Intent credit;
     Intent k;
     Intent coders;
+    Intent open;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.main_act);
 
-        Button b1, b2, credits, bg, forPromocodes;
+        Button b1, b2, credits, bg, forPromocodes, opening;
 
         b1 = (Button)findViewById(R.id.b1);
         b2 = (Button)findViewById(R.id.b2);
         credits = (Button)findViewById(R.id.credits);
         bg = (Button)findViewById(R.id.bg);
         forPromocodes = (Button)findViewById(R.id.forPromocodes);
+        opening = (Button)findViewById(R.id.openingB);
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +68,14 @@ public class Main extends AppCompatActivity {
             public void onClick(View view) {
                 k = new Intent(Main.this, Codes.class);
                 startActivity(k);
+            }
+        });
+
+        opening.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                open = new Intent(Main.this, Openings.class);
+                startActivity(open);
             }
         });
     }
