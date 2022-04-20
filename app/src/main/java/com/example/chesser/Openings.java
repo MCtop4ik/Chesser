@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class Openings extends AppCompatActivity {
     private SQLiteDatabase mDb;
+    public static String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,12 +25,13 @@ public class Openings extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ArrayList<String> words = new ArrayList<>();
-                Cursor cursor = mDb.rawQuery("SELECT * FROM a where `id` = '1'",null);
+                Cursor cursor = mDb.rawQuery("SELECT * FROM a where `id` = '2250'",null);
                 cursor.moveToFirst();
-                String user = cursor.getString(2);
+                String eco = cursor.getString(1);
+                name = cursor.getString(2);
                 String pass = cursor.getString(3);
                 cursor.close();
-                Toast toast = Toast.makeText(getApplicationContext(), user +" : " + pass, Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(), eco + " : " + name +" >>> " + pass, Toast.LENGTH_LONG);
                 toast.show();
             }
         });

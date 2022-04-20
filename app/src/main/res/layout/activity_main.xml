@@ -5,4 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/infoOpening"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="opening"
+        android:fontFamily="sans-serif-black"
+        android:textSize="34sp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

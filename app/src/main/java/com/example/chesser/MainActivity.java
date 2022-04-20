@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,9 +21,11 @@ public class MainActivity extends AppCompatActivity {
     public static String colors;
     public static String switcher;
     public static String backgrounds_font;
+    //EditText openingI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        //openingI = findViewById(R.id.infoOpening);
         super.onCreate(savedInstanceState);
         if (mSettings.contains(APP_PREFERENCES_BOARD) && mSettings.contains(APP_PREFERENCES_PIECE)
                 && mSettings.contains(APP_PREFERENCES_SWITCH) && mSettings.contains(APP_PREFERENCES_BG)) {
@@ -44,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             editor.apply();
             backgrounds_font = mSettings.getString(APP_PREFERENCES_BG, "");
         }
+
         getSupportActionBar().hide();
         setContentView(new TestSurfaceView(this));
     }
