@@ -2,6 +2,8 @@ package com.example.chesser;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,9 +17,12 @@ import java.util.ArrayList;
 public class Openings extends AppCompatActivity {
     private SQLiteDatabase mDb;
     public static String name;
+    public static final String APP_PREFERENCES = "data";
+    SharedPreferences mSettings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         setContentView(R.layout.activity_openings);
         initDB();
         final Button buttonOK = findViewById(R.id.openingButton);
@@ -33,6 +38,9 @@ public class Openings extends AppCompatActivity {
                 cursor.close();
                 Toast toast = Toast.makeText(getApplicationContext(), eco + " : " + name +" >>> " + pass, Toast.LENGTH_LONG);
                 toast.show();
+                SharedPreferences.Editor editor = mSettings.edit();
+                editor.putString("opening", "name");
+                editor.apply();
             }
         });
     }

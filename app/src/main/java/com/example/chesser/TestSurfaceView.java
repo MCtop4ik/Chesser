@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -35,6 +36,8 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     boolean rightToCastleShortBlack = true;
     boolean rightToCastleLongWhite = true;
     boolean rightToCastleLongBlack = true;
+    String name = "";
+    String new_name = "";
 
     String[][] twoDimArray = {
             {"r", "n", "b", "q", "k", "b", "n", "r"},
@@ -611,6 +614,11 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         Paint paint = new Paint();
         Paint paint_square = new Paint();
         Paint paint_circles = new Paint();
+        Paint FontPaint= new Paint();
+        int ft = getResources().getColor(R.color.turkish);
+        FontPaint.setColor(ft);
+        FontPaint.setTextSize(42);
+        FontPaint.setTypeface(Typeface.create("Arial", Typeface.BOLD_ITALIC));
         paint.setColor(Color.RED);
         paint_square.setColor(Color.WHITE);
         while(true){
@@ -807,15 +815,20 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                         II();
                     }
                     movePiece();
-                    if (colorfully.equals("sea") || colorfully.equals("turkish  ")){
+                    if (colorfully.equals("sea") || colorfully.equals("turkish")){
                         paint_circles.setColor(Color.RED);
                     }else if (colorfully.equals("raspberry")){
                         paint_circles.setColor(Color.BLUE);
                     }else{
                         paint_circles.setColor(Color.GREEN);
                     }
+                    name = MainActivity.name;
+                    for (int i = 0; i < name.length(); i++){
+                        new_name = new_name +  name;
+                    }
+                    canvas.drawText(name, 20, draw_width/2, FontPaint);
                     canvas.drawCircle(last_x, last_y, 10 , paint_circles);
-                } finally{
+                }finally{
                     getHolder().unlockCanvasAndPost(canvas);
                 }
             }

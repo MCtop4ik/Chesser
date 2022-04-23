@@ -2,13 +2,19 @@ package com.example.chesser;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public SharedPreferences mSettings;
@@ -21,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
     public static String colors;
     public static String switcher;
     public static String backgrounds_font;
+    public static String startGame;
+    public static String name;
+    public static String eco;
+    public static String pass;
+    private SQLiteDatabase mDb;
     //EditText openingI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             colors = mSettings.getString(APP_PREFERENCES_BOARD, "");
             switcher = mSettings.getString(APP_PREFERENCES_SWITCH, "");
             backgrounds_font = mSettings.getString(APP_PREFERENCES_BG, "");
-        }else{
+        }else {
             SharedPreferences.Editor editor = mSettings.edit();
             editor.putString(APP_PREFERENCES_PIECE, "first");
             editor.apply();
@@ -47,9 +58,28 @@ public class MainActivity extends AppCompatActivity {
             editor.putString(APP_PREFERENCES_BG, "1");
             editor.apply();
             backgrounds_font = mSettings.getString(APP_PREFERENCES_BG, "");
+            editor.putString(APP_PREFERENCES_BG, " ");
+            editor.apply();
+            startGame = mSettings.getString(APP_PREFERENCES_BG, "");
         }
-
+        initDB();
+        Cursor cursor = mDb.rawQuery("SELECT * FROM a where `id` = '3402'",null);
+        cursor.moveToFirst();
+        eco = cursor.getString(1);
+        name = cursor.getString(2);
+        pass = cursor.getString(3);
+        cursor.close();
         getSupportActionBar().hide();
         setContentView(new TestSurfaceView(this));
+    }
+    private void initDB() {
+        //Переменная для работы с БД
+        DatabaseHelper mDBHelper = new DatabaseHelper(this);
+        try {
+            mDBHelper.updateDataBase();
+        } catch (IOException mIOException) {
+            throw new Error("UnableToUpdateDatabase");
+        }
+        mDb = mDBHelper.getWritableDatabase();
     }
 }
