@@ -14,9 +14,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+import javax.xml.transform.Source;
+
+public class MainActivity extends AppCompatActivity implements Runnable{
     public SharedPreferences mSettings;
     String APP_PREFERENCES_BOARD = MyConstants.APP_PREFERENCES_BOARD;
     String APP_PREFERENCES_PIECE = MyConstants.APP_PREFERENCES_PIECE;
@@ -28,9 +31,10 @@ public class MainActivity extends AppCompatActivity {
     public static String switcher;
     public static String backgrounds_font;
     public static String startGame;
-    public static String name;
-    public static String eco;
+    public static String name = " ";
+    public static String eco = " ";
     public static String pass;
+    public String pgn;
     private SQLiteDatabase mDb;
     //EditText openingI;
     @Override
@@ -62,15 +66,9 @@ public class MainActivity extends AppCompatActivity {
             editor.apply();
             startGame = mSettings.getString(APP_PREFERENCES_BG, "");
         }
-        initDB();
-        Cursor cursor = mDb.rawQuery("SELECT * FROM a where `id` = '3402'",null);
-        cursor.moveToFirst();
-        eco = cursor.getString(1);
-        name = cursor.getString(2);
-        pass = cursor.getString(3);
-        cursor.close();
         getSupportActionBar().hide();
         setContentView(new TestSurfaceView(this));
+        initDB();
     }
     private void initDB() {
         //Переменная для работы с БД
@@ -81,5 +79,29 @@ public class MainActivity extends AppCompatActivity {
             throw new Error("UnableToUpdateDatabase");
         }
         mDb = mDBHelper.getWritableDatabase();
+    }
+
+    private void testOpening(){
+        pgn = TestSurfaceView.pgn;
+        for (int k = 1; k < 3403; k++){
+            String req = "SELECT * FROM a where `id` = " + k;
+            Cursor cursor = mDb.rawQuery(req,null);
+            cursor.moveToFirst();
+            pass = cursor.getString(3);
+            String new_pass = pass + " ";
+            if (pgn.equals(new_pass)){
+                System.out.println("here it is");
+                eco = cursor.getString(1);
+                name = cursor.getString(2);
+            }
+
+            cursor.close();
+        }
+    }
+
+    @Override
+    public void run() {
+        testOpening();
+        System.out.println(TestSurfaceView.pgn);
     }
 }

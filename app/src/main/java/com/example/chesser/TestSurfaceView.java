@@ -19,6 +19,8 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     String colors = MainActivity.colors;
     String switcher = MainActivity.switcher;
     String bg = MainActivity.backgrounds_font;
+    static String pgn = "1. c4 ";
+    static int count = 1;
     int x = -100;
     int y = -100;
     int width_dp = 0;
@@ -374,6 +376,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                             last_y = 0;
                             x = -100;
                             y = -100;
+                            System.out.println(pgn);
                         }
                     }
                 }
@@ -381,10 +384,65 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         }
     }
 
+    public String getCoordinate(int a, int j){
+        int g = 8 - j;
+        switch (a) {
+            case(0):
+                return "a" + g;
+            case(1):
+                return "b" + g;
+            case(2):
+                return "c" + g;
+            case(3):
+                return "d" + g;
+            case(4):
+                return "e" + g;
+            case(5):
+                return "f" + g;
+            case(6):
+                return "g" + g;
+            case(7):
+                return "h" + g;
+
+            default:
+                return "";
+        }
+
+    }
+
+    public String getLetter(int a){
+        System.out.println(a);
+        switch (a) {
+            case(0):
+                return "a";
+            case(1):
+                return "b";
+            case(2):
+                return "c";
+            case(3):
+                return "d";
+            case(4):
+                return "e";
+            case(5):
+                return "f";
+            case(6):
+                return "g";
+            case(7):
+                return "h";
+            default:
+                return "";
+        }
+
+    }
+
     public boolean checkWhitePawn(int i, int j){
         if (last_i == i+2 && last_i == 6 && twoDimArray[i][last_j].equals("") && last_j == j){
+            pgn += count + ". " + getCoordinate(j, i) + " ";
+            count += 1;
             return true;
         }else if (last_i == i+1 && twoDimArray[i][last_j].equals("") && last_j==j){
+            pgn += count + ". " + getCoordinate(j, i) + " ";
+            count += 1;
             return true;
         }else if (last_i == i+1 && (j == last_j+1 || j == last_j-1)
                 && (twoDimArray[i][j].equals("p") ||
@@ -393,6 +451,8 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                 twoDimArray[i][j].equals("r") ||
                 twoDimArray[i][j].equals("q") ||
                 twoDimArray[i][j].equals("k"))){
+                pgn += count + ". " + getLetter(last_j) + "x" + getCoordinate(j, i) + " ";
+                count += 1;
             return true;
         }
         else{
@@ -402,8 +462,10 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
     public boolean checkBlackPawn(int i, int j){
         if (last_i == i-2 && last_i == 1 && twoDimArray[i][last_j].equals("") && last_j == j){
+            pgn += getCoordinate(j, i) + " ";
             return true;
         }else if (last_i == i-1 && twoDimArray[i][last_j].equals("") && last_j==j){
+            pgn += getCoordinate(j, i) + " ";
             return true;
         }else if (last_i == i-1 && (j == last_j+1 || j == last_j-1)
                 && (twoDimArray[i][j].equals("P") ||
@@ -412,6 +474,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                 twoDimArray[i][j].equals("R") ||
                 twoDimArray[i][j].equals("Q") ||
                 twoDimArray[i][j].equals("K"))){
+            pgn += getLetter(last_j) + "x" + getCoordinate(j, i) + " ";
             return true;
         }
         else{
