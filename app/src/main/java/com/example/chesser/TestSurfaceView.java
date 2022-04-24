@@ -19,7 +19,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     String colors = MainActivity.colors;
     String switcher = MainActivity.switcher;
     String bg = MainActivity.backgrounds_font;
-    static String pgn = "1. c4 ";
+    static String pgn = "";
     static int count = 1;
     int x = -100;
     int y = -100;
@@ -376,7 +376,6 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                             last_y = 0;
                             x = -100;
                             y = -100;
-                            System.out.println(pgn);
                         }
                     }
                 }

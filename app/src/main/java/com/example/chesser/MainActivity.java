@@ -67,19 +67,11 @@ public class MainActivity extends AppCompatActivity implements Runnable{
             startGame = mSettings.getString(APP_PREFERENCES_BG, "");
         }
         getSupportActionBar().hide();
-        setContentView(new TestSurfaceView(this));
         initDB();
+        setContentView(new TestSurfaceView(this));
+        new Thread(this).start();
     }
-    private void initDB() {
-        //Переменная для работы с БД
-        DatabaseHelper mDBHelper = new DatabaseHelper(this);
-        try {
-            mDBHelper.updateDataBase();
-        } catch (IOException mIOException) {
-            throw new Error("UnableToUpdateDatabase");
-        }
-        mDb = mDBHelper.getWritableDatabase();
-    }
+
 
     private void testOpening(){
         pgn = TestSurfaceView.pgn;
@@ -101,7 +93,19 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
     @Override
     public void run() {
-        testOpening();
-        System.out.println(TestSurfaceView.pgn);
+        while(true){
+            testOpening();
+            System.out.println(TestSurfaceView.pgn);
+        }
+    }
+    private void initDB() {
+        //Переменная для работы с БД
+        DatabaseHelper mDBHelper = new DatabaseHelper(this);
+        try {
+            mDBHelper.updateDataBase();
+        } catch (IOException mIOException) {
+            throw new Error("UnableToUpdateDatabase");
+        }
+        mDb = mDBHelper.getWritableDatabase();
     }
 }
