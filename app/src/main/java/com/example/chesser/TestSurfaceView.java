@@ -39,7 +39,8 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     boolean rightToCastleLongWhite = true;
     boolean rightToCastleLongBlack = true;
     String name = "";
-    String new_name = "";
+    String new_name = " ";
+    String wm = "";
 
     String[][] twoDimArray = {
             {"r", "n", "b", "q", "k", "b", "n", "r"},
@@ -485,6 +486,18 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         int dx = abs(i - last_i);
         int dy = abs(j - last_j);
         if(((dx == 1 && dy == 2) || (dx == 2 && dy == 1)) && whiteEats(i, j)){
+            if (twoDimArray[i][j].equals("p") ||
+                    twoDimArray[i][j].equals("n") ||
+                    twoDimArray[i][j].equals("b") ||
+                    twoDimArray[i][j].equals("r") ||
+                    twoDimArray[i][j].equals("q") ||
+                    twoDimArray[i][j].equals("k")){
+                pgn += count + ". N" + "x" + getCoordinate(j, i) + " ";
+                count += 1;
+            }else{
+                pgn += count + ". N" + getCoordinate(j, i) + " ";
+                count += 1;
+            }
             return true;
         }else{
             return false;
@@ -495,6 +508,16 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         int dx = abs(i - last_i);
         int dy = abs(j - last_j);
         if(((dx == 1 && dy == 2) || (dx == 2 && dy == 1)) && blackEats(i, j)){
+            if (twoDimArray[i][j].equals("P") ||
+                    twoDimArray[i][j].equals("N") ||
+                    twoDimArray[i][j].equals("B") ||
+                    twoDimArray[i][j].equals("R") ||
+                    twoDimArray[i][j].equals("Q") ||
+                    twoDimArray[i][j].equals("K")){
+                pgn += "N" + "x" + getCoordinate(j, i) + " ";
+            }else{
+                pgn += "N" + getCoordinate(j, i) + " ";
+            }
             return true;
         }else{
             return false;
@@ -503,6 +526,18 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
     public boolean checkWhiteBishop(int i, int j){
         if((abs(i - last_i) == abs(j - last_j)) && whiteEats(i, j)){
+            if (twoDimArray[i][j].equals("p") ||
+                    twoDimArray[i][j].equals("n") ||
+                    twoDimArray[i][j].equals("b") ||
+                    twoDimArray[i][j].equals("r") ||
+                    twoDimArray[i][j].equals("q") ||
+                    twoDimArray[i][j].equals("k")){
+                pgn += count + ". B" + "x" + getCoordinate(j, i) + " ";
+                count += 1;
+            }else{
+                pgn += count + ". B" + getCoordinate(j, i) + " ";
+                count += 1;
+            }
             return true;
         }else{
             return false;
@@ -511,6 +546,16 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
     public boolean checkBlackBishop(int i, int j){
         if((abs(i - last_i) == abs(j - last_j)) && blackEats(i, j)){
+            if (twoDimArray[i][j].equals("P") ||
+                    twoDimArray[i][j].equals("N") ||
+                    twoDimArray[i][j].equals("B") ||
+                    twoDimArray[i][j].equals("R") ||
+                    twoDimArray[i][j].equals("Q") ||
+                    twoDimArray[i][j].equals("K")){
+                pgn += "Bx" + getCoordinate(j, i) + " ";
+            }else{
+                pgn += "B" + getCoordinate(j, i) + " ";
+            }
             return true;
         }else{
             return false;
@@ -548,6 +593,18 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
     public boolean checkWhiteQueen(int i, int j){
         if(((abs(i - last_i) == abs(j - last_j)) || ((i == last_i) || (j == last_j))) && whiteEats(i, j)){
+            if (twoDimArray[i][j].equals("p") ||
+                    twoDimArray[i][j].equals("n") ||
+                    twoDimArray[i][j].equals("b") ||
+                    twoDimArray[i][j].equals("r") ||
+                    twoDimArray[i][j].equals("q") ||
+                    twoDimArray[i][j].equals("k")){
+                pgn += count + ". Q" + "x" + getCoordinate(j, i) + " ";
+                count += 1;
+            }else{
+                pgn += count + ". Q" + getCoordinate(j, i) + " ";
+                count += 1;
+            }
             return true;
         }else{
             return false;
@@ -556,6 +613,16 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
     public boolean checkBlackQueen(int i, int j){
         if(((abs(i - last_i) == abs(j - last_j)) || ((i == last_i) || (j == last_j))) && blackEats(i, j)){
+            if (twoDimArray[i][j].equals("P") ||
+                    twoDimArray[i][j].equals("N") ||
+                    twoDimArray[i][j].equals("B") ||
+                    twoDimArray[i][j].equals("R") ||
+                    twoDimArray[i][j].equals("Q") ||
+                    twoDimArray[i][j].equals("K")){
+                pgn += "Q" + "x" + getCoordinate(j, i) + " ";
+            }else{
+                pgn += "Q" + getCoordinate(j, i) + " ";
+            }
             return true;
         }else{
             return false;
@@ -563,6 +630,18 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     }
     public boolean checkWhiteKing(int i, int j){
         if((abs(last_i - i) <= 1 && abs(last_j - j) <= 1) && whiteEats(i, j)){
+            if (twoDimArray[i][j].equals("p") ||
+                    twoDimArray[i][j].equals("n") ||
+                    twoDimArray[i][j].equals("b") ||
+                    twoDimArray[i][j].equals("r") ||
+                    twoDimArray[i][j].equals("q") ||
+                    twoDimArray[i][j].equals("k")){
+                pgn += count + ". K" + "x" + getCoordinate(j, i) + " ";
+                count += 1;
+            }else{
+                pgn += count + ". K" + getCoordinate(j, i) + " ";
+                count += 1;
+            }
             return true;
         }else{
             return false;
@@ -571,6 +650,18 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
     public boolean checkBlackKing(int i, int j){
         if((abs(last_i - i) <= 1 && abs(last_j - j) <= 1) && blackEats(i, j)){
+            if (twoDimArray[i][j].equals("p") ||
+                    twoDimArray[i][j].equals("n") ||
+                    twoDimArray[i][j].equals("b") ||
+                    twoDimArray[i][j].equals("r") ||
+                    twoDimArray[i][j].equals("q") ||
+                    twoDimArray[i][j].equals("k")){
+                pgn += count + "K" + "x" + getCoordinate(j, i) + " ";
+                count += 1;
+            }else{
+                pgn += count + "K" + getCoordinate(j, i) + " ";
+                count += 1;
+            }
             return true;
         }else{
             return false;
@@ -885,10 +976,13 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                         paint_circles.setColor(Color.GREEN);
                     }
                     name = MainActivity.name;
-                    for (int i = 0; i < name.length(); i++){
-                        new_name = new_name +  name;
-                    }
-                    canvas.drawText(name, 20, draw_width/2, FontPaint);
+                    new_name = name + ": ";
+                    String[] words = new_name.split(":");
+                    FontPaint.setColor(ft);
+                    canvas.drawText(MainActivity.eco + " " + words[0], 20, draw_width/2, FontPaint);
+                    FontPaint.setColor(Color.WHITE);
+                    wm = ">>>" + words[1];
+                    canvas.drawText(wm, 20, draw_width/2+60, FontPaint);
                     canvas.drawCircle(last_x, last_y, 10 , paint_circles);
                 }finally{
                     getHolder().unlockCanvasAndPost(canvas);

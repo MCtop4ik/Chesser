@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
     private void testOpening(){
         pgn = TestSurfaceView.pgn;
-        for (int k = 1; k < 3403; k++){
+        for (int k = 1; k < 3404 ; k++){
             String req = "SELECT * FROM a where `id` = " + k;
             Cursor cursor = mDb.rawQuery(req,null);
             cursor.moveToFirst();
