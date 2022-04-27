@@ -31,10 +31,13 @@ public class Codes extends AppCompatActivity {
                     editor.putString(MyConstants.APP_PREFERENCES_PIECE, "second");
                     editor.putString(MyConstants.APP_PREFERENCES_BOARD, "sea");
                     editor.putString(MyConstants.APP_PREFERENCES_SWITCH, "WHITE");
-                    editor.putString(MyConstants.APP_PREFERENCES_BG, "2");
+                    editor.putString(MyConstants.APP_PREFERENCES_BG, "1");
                     editor.apply();
-                }else if(promo.getText().toString().equals(">>>idk")){
-                    System.out.println("why");
+                }else if(promo.getText().toString().equals(">>>destroyUser")){
+                    SharedPreferences.Editor editor = mSettings.edit();
+                    editor.putString("Name", "");
+                    editor.putString("Password", "");
+                    editor.apply();
                 }
             }
         });

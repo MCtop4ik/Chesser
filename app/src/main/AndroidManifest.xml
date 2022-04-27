@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Chesser">
         <activity
+            android:name=".register"
+            android:exported="true" />
+        <activity
+            android:name=".Main"
+            android:exported="true" />
+        <activity
             android:name=".Openings"
             android:exported="true" />
         <activity
@@ -25,7 +31,7 @@
             android:name=".Codes"
             android:exported="true" />
         <activity
-            android:name=".Main"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

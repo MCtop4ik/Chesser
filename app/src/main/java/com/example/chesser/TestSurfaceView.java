@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.fonts.Font;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -982,8 +983,10 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     canvas.drawText(MainActivity.eco + " " + words[0], 20, draw_width/2, FontPaint);
                     FontPaint.setColor(Color.WHITE);
                     wm = ">>>" + words[1];
-                    canvas.drawText(wm, 20, draw_width/2+60, FontPaint);
+                    canvas.drawText(wm, 20, draw_width / 2 +60, FontPaint);
                     canvas.drawCircle(last_x, last_y, 10 , paint_circles);
+                    FontPaint.setColor(Color.BLUE);
+                    canvas.drawText(pgn, 20, draw_width * 9 + draw_width / 2 + 60, FontPaint);
                 }finally{
                     getHolder().unlockCanvasAndPost(canvas);
                 }

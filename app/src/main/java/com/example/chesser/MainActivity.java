@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     String APP_PREFERENCES_PIECE = MyConstants.APP_PREFERENCES_PIECE;
     String APP_PREFERENCES_SWITCH = MyConstants.APP_PREFERENCES_SWITCH;
     String APP_PREFERENCES_BG = MyConstants.APP_PREFERENCES_BG;
+    String APP_PREFERENCES_PGN = MyConstants.APP_PREFERENCES_BG;
     String APP_PREFERENCES = "data";
     public static String colorful_palette;
     public static String colors;
@@ -51,20 +52,16 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         }else {
             SharedPreferences.Editor editor = mSettings.edit();
             editor.putString(APP_PREFERENCES_PIECE, "first");
-            editor.apply();
             colorful_palette = mSettings.getString(APP_PREFERENCES_PIECE, "");
             editor.putString(APP_PREFERENCES_BOARD, "sea");
-            editor.apply();
             colors = mSettings.getString(APP_PREFERENCES_BOARD, "");
             editor.putString(APP_PREFERENCES_SWITCH, "WHITE");
-            editor.apply();
             switcher = mSettings.getString(APP_PREFERENCES_SWITCH, "");
             editor.putString(APP_PREFERENCES_BG, "1");
-            editor.apply();
             backgrounds_font = mSettings.getString(APP_PREFERENCES_BG, "");
-            editor.putString(APP_PREFERENCES_BG, " ");
+            editor.putString(APP_PREFERENCES_PGN, " ");
+            startGame = mSettings.getString(APP_PREFERENCES_PGN, "");
             editor.apply();
-            startGame = mSettings.getString(APP_PREFERENCES_BG, "");
         }
         getSupportActionBar().hide();
         initDB();
