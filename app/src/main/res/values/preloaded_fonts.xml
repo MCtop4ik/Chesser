@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/armata</item>
+        <item>@font/artifika</item>
+        <item>@font/baloo_tammudu</item>
+        <item>@font/bungee_inline</item>
+        <item>@font/fascinate</item>
+        <item>@font/racing_sans_one</item>
+    </array>
+</resources>

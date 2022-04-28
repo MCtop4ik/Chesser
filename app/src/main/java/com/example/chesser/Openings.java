@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Openings extends AppCompatActivity {
     private SQLiteDatabase mDb;
@@ -29,8 +30,14 @@ public class Openings extends AppCompatActivity {
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int min = 1;
+                int max = 3403;
+                Random rnd = new Random(System.currentTimeMillis());
+                int number = min + rnd.nextInt(max - min + 1);
+                String num = Integer.toString(number);
+                String req = "SELECT * FROM a where `id` = '" + num + "'";
                 ArrayList<String> words = new ArrayList<>();
-                Cursor cursor = mDb.rawQuery("SELECT * FROM a where `id` = '2250'",null);
+                Cursor cursor = mDb.rawQuery(req,null);
                 cursor.moveToFirst();
                 String eco = cursor.getString(1);
                 name = cursor.getString(2);

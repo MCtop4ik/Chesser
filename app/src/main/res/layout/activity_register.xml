@@ -8,80 +8,99 @@
 
     <EditText
         android:id="@+id/nameEnter"
-        android:layout_width="233dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="114dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:ems="10"
+        android:fontFamily="@font/baloo_tammudu"
         android:hint="Name"
         android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
 
     <TextView
         android:id="@+id/nameLabel"
-        android:layout_width="233dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="95dp"
-        android:layout_marginEnd="114dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/artifika"
         android:text="Name"
+        android:textAlignment="center"
         android:textSize="54sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/passwordEnter"
-        android:layout_width="233dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="112dp"
-        android:hint="PasswordEnter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:ems="10"
+        android:fontFamily="@font/baloo_tammudu"
+        android:hint="PasswordEnter"
         android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordLabel" />
 
     <TextView
         android:id="@+id/passwordLabel"
-        android:layout_width="257dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="90dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/artifika"
         android:text="Password"
+        android:textAlignment="center"
         android:textSize="54sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameEnter" />
 
     <EditText
         android:id="@+id/mailEnter"
-        android:layout_width="233dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="192dp"
-        android:layout_marginEnd="112dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:ems="10"
+        android:fontFamily="@font/baloo_tammudu"
         android:hint="MailEnter"
         android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordLabel" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mailLabel" />
 
     <TextView
         android:id="@+id/mailLabel"
-        android:layout_width="257dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="208dp"
-        android:layout_marginEnd="88dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/artifika"
         android:text="Mail"
+        android:textAlignment="center"
         android:textSize="54sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameEnter" />
+        app:layout_constraintHorizontal_bias="0.939"
+        app:layout_constraintStart_toEndOf="@+id/passwordLabel"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEnter" />
 
     <Button
         android:id="@+id/regButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="208dp"
-        android:layout_marginEnd="196dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#411F47"
+        android:fontFamily="@font/racing_sans_one"
         android:text="enter"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEnter" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mailEnter" />
 </androidx.constraintlayout.widget.ConstraintLayout>

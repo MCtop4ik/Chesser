@@ -10,8 +10,8 @@
 
     <Button
         android:id="@+id/send"
-        android:layout_width="219dp"
-        android:layout_height="97dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="send"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,19 +23,17 @@
         android:id="@+id/promocodeInput"
         android:layout_width="281dp"
         android:layout_height="114dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="202dp"
+        android:layout_marginTop="192dp"
+        android:layout_marginBottom="28dp"
         android:ems="10"
+        android:hint="write promo code"
         android:inputType="textPersonName"
-        android:textSize="32sp"
-        android:textStyle="bold|italic"
         android:text=">>>"
         android:textColorHint="@color/tea"
-        android:hint="write promo code"
+        android:textSize="32sp"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toTopOf="@+id/send"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
