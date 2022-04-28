@@ -15,6 +15,7 @@ public class register extends AppCompatActivity {
     Button b1;
     EditText login;
     EditText password;
+    EditText email;
     Intent goToMain;
     SharedPreferences mSettings;
 
@@ -28,6 +29,7 @@ public class register extends AppCompatActivity {
         b1 = findViewById(R.id.regButton);
         login = findViewById(R.id.nameEnter);
         password = findViewById(R.id.passwordEnter);
+        email = findViewById(R.id.mailEnter);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,6 +37,7 @@ public class register extends AppCompatActivity {
                         && !password.getText().toString().equals("") ){
                     editor.putString("Name", login.getText().toString());
                     editor.putString("Password", password.getText().toString());
+                    editor.putString("email", email.getText().toString());
                     editor.apply();
                     goToMain = new Intent(register.this, Login.class);
                     startActivity(goToMain);
