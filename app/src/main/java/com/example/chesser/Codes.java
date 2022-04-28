@@ -3,6 +3,7 @@ package com.example.chesser;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 public class Codes extends AppCompatActivity {
     SharedPreferences mSettings;
+    Intent open;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mSettings = getSharedPreferences(MyConstants.APP_PREFERENCES, Context.MODE_PRIVATE);
@@ -51,6 +53,9 @@ public class Codes extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(),
                             mSettings.getString("email", ""), Toast.LENGTH_SHORT);
                     toast.show();
+                }else if(promo.getText().toString().equals(">>>opening")){
+                    open = new Intent(Codes.this, Openings.class);
+                    startActivity(open);
                 }
             }
         });

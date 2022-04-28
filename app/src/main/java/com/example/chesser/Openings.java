@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -20,12 +21,14 @@ public class Openings extends AppCompatActivity {
     public static String name;
     public static final String APP_PREFERENCES = "data";
     SharedPreferences mSettings;
+    TextView openI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         setContentView(R.layout.activity_openings);
         initDB();
+        openI = findViewById(R.id.infoOpeningIs);
         final Button buttonOK = findViewById(R.id.openingButton);
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +51,10 @@ public class Openings extends AppCompatActivity {
                 SharedPreferences.Editor editor = mSettings.edit();
                 editor.putString("opening", "name");
                 editor.apply();
+                String[] word = name.split(":");
+                String txt = eco + ": " + word[0] + ":\n" + word[1] + "\n" + pass + "\n" +
+                        "Сcылки на видео:" + "\n" + "Книги:";
+                openI.setText(txt);
             }
         });
     }

@@ -22,15 +22,13 @@ public class Main extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.main_act);
 
-        Button b1, b2, credits, bg, forPromocodes, opening;
+        Button b1, b2, credits, bg, forPromocodes;
 
-        b1 = (Button)findViewById(R.id.b1);
-        b2 = (Button)findViewById(R.id.b2);
-        credits = (Button)findViewById(R.id.credits);
-        bg = (Button)findViewById(R.id.bg);
-        forPromocodes = (Button)findViewById(R.id.forPromocodes);
-        opening = (Button)findViewById(R.id.openingB);
-
+        b1 = findViewById(R.id.b1);
+        b2 = findViewById(R.id.b2);
+        credits = findViewById(R.id.credits);
+        bg = findViewById(R.id.bg);
+        forPromocodes = findViewById(R.id.forPromocodes);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,14 +68,5 @@ public class Main extends AppCompatActivity {
                 startActivity(k);
             }
         });
-
-        opening.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                open = new Intent(Main.this, Openings.class);
-                startActivity(open);
-            }
-        });
     }
-
 }
