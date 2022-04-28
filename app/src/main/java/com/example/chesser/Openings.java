@@ -45,6 +45,8 @@ public class Openings extends AppCompatActivity {
                 String eco = cursor.getString(1);
                 name = cursor.getString(2);
                 String pass = cursor.getString(3);
+                String book = cursor.getString(4);
+                String yt = cursor.getString(5);
                 cursor.close();
                 Toast toast = Toast.makeText(getApplicationContext(), eco + " : " + name +" >>> " + pass, Toast.LENGTH_LONG);
                 toast.show();
@@ -53,7 +55,7 @@ public class Openings extends AppCompatActivity {
                 editor.apply();
                 String[] word = name.split(":");
                 String txt = eco + ": " + word[0] + ":\n" + word[1] + "\n" + pass + "\n" +
-                        "Сcылки на видео:" + "\n" + "Книги:";
+                        "Сcылки на видео:" + "\n" + yt + "\n" + "Книги:" + "\n" + book;
                 openI.setText(txt);
             }
         });
