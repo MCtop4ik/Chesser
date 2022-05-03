@@ -27,23 +27,23 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     int width_dp = 0;
     int height_dp = 0;
     int test = 0;
-    int next_line = 0;
-    int last_x = 0;
-    int last_y = 0;
-    int last_i = 8;
-    int last_j = 0;
-    int queue = 0;
-    int swi = 0;
-    String taken_piece = "";
+    static int next_line = 0;
+    static int last_x = 0;
+    static int last_y = 0;
+    static int last_i = 8;
+    static int last_j = 0;
+    static int queue = 0;
+    static int swi = 0;
+    static String taken_piece = "";
     boolean rightToCastleShortWhite = true;
     boolean rightToCastleShortBlack = true;
     boolean rightToCastleLongWhite = true;
     boolean rightToCastleLongBlack = true;
-    String name = "";
-    String new_name = " ";
-    String wm = "";
+    static String name = "";
+    static String new_name = " ";
+    static String wm = "";
 
-    String[][] twoDimArray = {
+    public static String[][] twoDimArray = {
             {"r", "n", "b", "q", "k", "b", "n", "r"},
             {"p", "p", "p", "p", "p", "p", "p", "p"},
             {"", "", "", "", "", "", "", ""},
@@ -206,7 +206,6 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         }else{
             my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.__20160214_2052636593);
         }
-
     }
 
     @Override
@@ -218,11 +217,34 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         new Thread(this).start();
-        if (switcher.equals("BLACK")) {
-            queue = 1;
-            swi = 1;
-            twoDimArray = new String[][]{{"r", "n", "b", "k", "q", "b", "n", "r"}, {"p", "p", "p", "p", "p", "p", "p", "p"}, {"", "", "", "", "", "", "", ""}, {"", "", "", "", "", "", "", ""}, {"", "", "", "", "", "", "", ""}, {"", "", "", "", "", "", "", ""}, {"P", "P", "P", "P", "P", "P", "P", "P"}, {"R", "N", "B", "K", "Q", "B", "N", "R"}, {""}};
+        if(MainActivity.game.equals("horde")){
+            twoDimArray = new String[][]{
+                    {"r", "n", "b", "q", "k", "b", "n", "r"},
+                    {"p", "p", "p", "p", "p", "p", "p", "p"},
+                    {"", "", "", "", "", "", "", ""},
+                    {"", "P", "P", "", "", "P", "P", ""},
+                    {"P", "P", "P", "P", "P", "P", "P", "P"},
+                    {"P", "P", "P", "P", "P", "P", "P", "P"},
+                    {"P", "P", "P", "P", "P", "P", "P", "P"},
+                    {"P", "P", "P", "P", "P", "P", "P", "P"},
+                    {""}};
+        }else if(MainActivity.game.equals("normal")){
+            twoDimArray = new String[][]{
+                    {"r", "n", "b", "q", "k", "b", "n", "r"},
+                    {"p", "p", "p", "p", "p", "p", "p", "p"},
+                    {"", "", "", "", "", "", "", ""},
+                    {"", "", "", "", "", "", "", ""},
+                    {"", "", "", "", "", "", "", ""},
+                    {"", "", "", "", "", "", "", ""},
+                    {"P", "P", "P", "P", "P", "P", "P", "P"},
+                    {"R", "N", "B", "Q", "K", "B", "N", "R"},
+                    {""}};
+            if (switcher.equals("BLACK")) {
+                queue = 1;
+                swi = 1;
+                twoDimArray = new String[][]{{"r", "n", "b", "k", "q", "b", "n", "r"}, {"p", "p", "p", "p", "p", "p", "p", "p"}, {"", "", "", "", "", "", "", ""}, {"", "", "", "", "", "", "", ""}, {"", "", "", "", "", "", "", ""}, {"", "", "", "", "", "", "", ""}, {"P", "P", "P", "P", "P", "P", "P", "P"}, {"R", "N", "B", "K", "Q", "B", "N", "R"}, {""}};
             }
+        }
         }
 
     @Override
@@ -852,7 +874,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     draw_width,
                     draw_height,
                     false);
-            if (switcher.equals("BLACK")){
+            if (switcher.equals("BLACK") && MainActivity.game.equals("normal")){
                 K = Bitmap.createScaledBitmap(bit_kb,
                         draw_width,
                         draw_width,

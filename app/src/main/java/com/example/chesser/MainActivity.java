@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     public static String name = " ";
     public static String eco = " ";
     public static String pass;
+    public static String game;
     public String pgn;
     private SQLiteDatabase mDb;
     //EditText openingI;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements Runnable{
             colors = mSettings.getString(APP_PREFERENCES_BOARD, "");
             switcher = mSettings.getString(APP_PREFERENCES_SWITCH, "");
             backgrounds_font = mSettings.getString(APP_PREFERENCES_BG, "");
+            game = mSettings.getString("game", "");
+
         }else {
             SharedPreferences.Editor editor = mSettings.edit();
             editor.putString(APP_PREFERENCES_PIECE, "first");
@@ -61,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements Runnable{
             backgrounds_font = mSettings.getString(APP_PREFERENCES_BG, "");
             editor.putString(APP_PREFERENCES_PGN, " ");
             startGame = mSettings.getString(APP_PREFERENCES_PGN, "");
+            editor.putString("game", "normal");
+            game = mSettings.getString("game", "");
             editor.apply();
         }
         getSupportActionBar().hide();

@@ -22,13 +22,14 @@ public class Main extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.main_act);
 
-        Button b1, b2, credits, bg, forPromocodes;
+        Button b1, b2, credits, bg, forPromocodes, variants;
 
         b1 = findViewById(R.id.b1);
         b2 = findViewById(R.id.b2);
         credits = findViewById(R.id.credits);
         bg = findViewById(R.id.bg);
         forPromocodes = findViewById(R.id.forPromocodes);
+        variants = findViewById(R.id.varChess);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,5 +69,14 @@ public class Main extends AppCompatActivity {
                 startActivity(k);
             }
         });
+
+        variants.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                open = new Intent(Main.this, VariantsOfChess.class);
+                startActivity(open);
+            }
+        });
+
     }
 }
