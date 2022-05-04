@@ -10,10 +10,20 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.fonts.Font;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable{
     String colorfully = MainActivity.colorful_palette;
@@ -22,6 +32,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     String bg = MainActivity.backgrounds_font;
     static String pgn = "";
     static int count = 1;
+    static ArrayList<String> illegalMovesW = new ArrayList<>();
     int x = -100;
     int y = -100;
     int width_dp = 0;
@@ -42,8 +53,19 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     static String name = "";
     static String new_name = " ";
     static String wm = "";
+    static boolean blackKingUnderCheck = false;
 
     public static String[][] twoDimArray = {
+            {"r", "n", "b", "q", "k", "b", "n", "r"},
+            {"p", "p", "p", "p", "p", "p", "p", "p"},
+            {"", "", "", "", "", "", "", ""},
+            {"", "", "", "", "", "", "", ""},
+            {"", "", "", "", "", "", "", ""},
+            {"", "", "", "", "", "", "", ""},
+            {"P", "P", "P", "P", "P", "P", "P", "P"},
+            {"R", "N", "B", "Q", "K", "B", "N", "R"},
+            {""}};
+    public static String[][] checkingTwoDimArray = {
             {"r", "n", "b", "q", "k", "b", "n", "r"},
             {"p", "p", "p", "p", "p", "p", "p", "p"},
             {"", "", "", "", "", "", "", ""},
@@ -274,11 +296,17 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                         if (last_i != i || last_j != j){
                             if (taken_piece.equals("P") && checkWhitePawn(i, j) && queue == 0) {
                                 twoDimArray[i][j] = taken_piece;
+                                if (i == 0){
+                                    twoDimArray[i][j] = "Q";
+                                }
                                 twoDimArray[last_i][last_j] = "";
                                 queue = 1;
                             }
                             if (taken_piece.equals("p") && checkBlackPawn(i, j) && queue == 1){
                                 twoDimArray[i][j] = taken_piece;
+                                if (i == 7){
+                                    twoDimArray[i][j] = "q";
+                                }
                                 twoDimArray[last_i][last_j] = "";
                                 queue = 0;
                             }
@@ -394,6 +422,9 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                                 castleSwitchBlackLong();
                                 queue = 0;
                             }
+                            checkLegalMovesWhite();
+                            checkingTwoDimArray = twoDimArray;
+                            System.out.println(illegalMovesW.toString());
                             last_j = 0;
                             last_i = 8;
                             last_x = 0;
@@ -541,6 +572,20 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
             }else{
                 pgn += "N" + getCoordinate(j, i) + " ";
             }
+            checkLegalMovesWhite();
+            if (blackKingUnderCheck){
+                checkingTwoDimArray = twoDimArray;
+                checkingTwoDimArray[i][j] = taken_piece;
+                checkingTwoDimArray[last_i][last_j] = ""; //тут ошибка конь превращается в ферзя
+                checkLegalMovesWhite();
+                if (blackKingUnderCheck){
+                    System.out.println("its obviosly on check");
+                    return true;
+                }else{
+                    System.out.println("works");
+                    return false;
+                }
+            }
             return true;
         }else{
             return false;
@@ -679,6 +724,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     twoDimArray[i][j].equals("r") ||
                     twoDimArray[i][j].equals("q") ||
                     twoDimArray[i][j].equals("k")){
+
                 pgn += count + "K" + "x" + getCoordinate(j, i) + " ";
                 count += 1;
             }else{
@@ -783,6 +829,51 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
     public void II(){
 
+    }
+
+    public void checkLegalMovesWhite(){
+        illegalMovesW.clear();
+        blackKingUnderCheck = false;
+        for(int i = 0; i < 8; i++){
+            for (int j = 0; j < 8; j++){
+                if (checkingTwoDimArray[i][j].equals("N")){
+                    for (int k = 0; k < 8; k++){
+                        for (int l = 0; l < 8; l++){
+                            last_i = i;
+                            last_j = j;
+                            if (checkWhiteKnight(k, l)){
+                                 if (checkingTwoDimArray[k][l].equals("k")){
+                                     blackKingUnderCheck = true;
+                                    System.out.println("Check");
+                                    illegalMovesW.add(k + ":" + l);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (checkingTwoDimArray[i][j].equals("Q")){
+                    for (int k = 0; k < 8; k++){
+                        for (int l = 0; l < 8; l++){
+                            last_i = i;
+                            last_j = j;
+                            if (checkWhiteQueen(k, l)){
+                                if (checkingTwoDimArray[k][l].equals("k")){
+                                    blackKingUnderCheck = true;
+                                    System.out.println("Check");
+                                    illegalMovesW.add(k + ":" + l);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < twoDimArray.length; i++) {
+            for (int j = 0; j < twoDimArray[i].length; j++) {
+                Log.i("first", checkingTwoDimArray[i][j]);
+                Log.i("second", twoDimArray[i][j]);
+            }
+        }
     }
 
     @Override
