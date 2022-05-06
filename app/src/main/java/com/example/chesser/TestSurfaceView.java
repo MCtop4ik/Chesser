@@ -606,37 +606,85 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
     public boolean checkWhiteBishop(int i, int j){
         if((abs(i - last_i) == abs(j - last_j)) && whiteEats(i, j)){
+            if(i > last_i){
+                if(j > last_j){
+                    for (int k = 1; k < j-last_j; k++){
+                        if (twoDimArray[last_i + k][last_j + k].equals("p")||
+                                twoDimArray[last_i + k][last_j + k].equals("n")||
+                                twoDimArray[last_i + k][last_j + k].equals("b")||
+                                twoDimArray[last_i + k][last_j + k].equals("r")||
+                                twoDimArray[last_i + k][last_j + k].equals("q")||
+                                twoDimArray[last_i + k][last_j + k].equals("k")||
+                                twoDimArray[last_i + k][last_j + k].equals("P")||
+                                twoDimArray[last_i + k][last_j + k].equals("N")||
+                                twoDimArray[last_i + k][last_j + k].equals("B")||
+                                twoDimArray[last_i + k][last_j + k].equals("R")||
+                                twoDimArray[last_i + k][last_j + k].equals("Q")||
+                                twoDimArray[last_i + k][last_j + k].equals("K")){
+                            return false;
+                        }
+                    }
+                }else{
+                    for (int k = 1; k < last_j - j; k++){
+                        if (twoDimArray[last_i + k][last_j + k].equals("p")||
+                                twoDimArray[last_i + k][last_j - k].equals("n")||
+                                twoDimArray[last_i + k][last_j - k].equals("b")||
+                                twoDimArray[last_i + k][last_j - k].equals("r")||
+                                twoDimArray[last_i + k][last_j - k].equals("q")||
+                                twoDimArray[last_i + k][last_j - k].equals("k")||
+                                twoDimArray[last_i + k][last_j - k].equals("P")||
+                                twoDimArray[last_i + k][last_j - k].equals("N")||
+                                twoDimArray[last_i + k][last_j - k].equals("B")||
+                                twoDimArray[last_i + k][last_j - k].equals("R")||
+                                twoDimArray[last_i + k][last_j - k].equals("Q")||
+                                twoDimArray[last_i + k][last_j - k].equals("K")){
+                            return false;
+                        }
+                    }
+                }
+            }else{
+                if(j > last_j){
+                    for (int k = 1; k < j - last_j; k++){
+                        if (twoDimArray[last_i - k][last_j + k].equals("p")||
+                                twoDimArray[last_i - k][last_j + k].equals("n")||
+                                twoDimArray[last_i - k][last_j + k].equals("b")||
+                                twoDimArray[last_i - k][last_j + k].equals("r")||
+                                twoDimArray[last_i - k][last_j + k].equals("q")||
+                                twoDimArray[last_i - k][last_j + k].equals("k")||
+                                twoDimArray[last_i - k][last_j + k].equals("P")||
+                                twoDimArray[last_i - k][last_j + k].equals("N")||
+                                twoDimArray[last_i - k][last_j + k].equals("B")||
+                                twoDimArray[last_i - k][last_j + k].equals("R")||
+                                twoDimArray[last_i - k][last_j + k].equals("Q")||
+                                twoDimArray[last_i - k][last_j + k].equals("K")){
+                            return false;
+                        }
+                    }
+                }else{
+                    for (int k = 1; k < last_j - j; k++){
+                        if (twoDimArray[last_i - k][last_j + k].equals("p")||
+                                twoDimArray[last_i - k][last_j - k].equals("n")||
+                                twoDimArray[last_i - k][last_j - k].equals("b")||
+                                twoDimArray[last_i - k][last_j - k].equals("r")||
+                                twoDimArray[last_i - k][last_j - k].equals("q")||
+                                twoDimArray[last_i - k][last_j - k].equals("k")||
+                                twoDimArray[last_i - k][last_j - k].equals("P")||
+                                twoDimArray[last_i - k][last_j - k].equals("N")||
+                                twoDimArray[last_i - k][last_j - k].equals("B")||
+                                twoDimArray[last_i - k][last_j - k].equals("R")||
+                                twoDimArray[last_i - k][last_j - k].equals("Q")||
+                                twoDimArray[last_i - k][last_j - k].equals("K")){
+                            return false;
+                        }
+                    }
+                }
+            }
             if (twoDimArray[i][j].equals("p") ||
                     twoDimArray[i][j].equals("n") ||
                     twoDimArray[i][j].equals("b") ||
                     twoDimArray[i][j].equals("r") ||
                     twoDimArray[i][j].equals("q") ||
                     twoDimArray[i][j].equals("k")){
-                if(i > last_i){
-                    if(j > last_j){
-                        for (int k = 1; k < j-last_j; k++){
-                            System.out.println(twoDimArray[last_i + k][last_j + k]);
-                            if (twoDimArray[last_i + k][last_j + k].equals("p")||
-                                    twoDimArray[last_i + k][last_j + k].equals("n")||
-                                    twoDimArray[last_i + k][last_j + k].equals("b")||
-                                    twoDimArray[last_i + k][last_j + k].equals("r")||
-                                    twoDimArray[last_i + k][last_j + k].equals("q")||
-                                    twoDimArray[last_i + k][last_j + k].equals("k")||
-                                    twoDimArray[last_i + k][last_j + k].equals("P")||
-                                    twoDimArray[last_i + k][last_j + k].equals("N")||
-                                    twoDimArray[last_i + k][last_j + k].equals("B")||
-                                    twoDimArray[last_i + k][last_j + k].equals("R")||
-                                    twoDimArray[last_i + k][last_j + k].equals("Q")||
-                                    twoDimArray[last_i + k][last_j + k].equals("K")){
-                                return false;
-                            }
-                        }
-                    }else{
-
-                    }
-                }else{
-
-                }
                 if (!notNotate) {
                     pgn += count + ". B" + "x" + getCoordinate(j, i) + " ";
                     count += 1;
@@ -655,6 +703,79 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
     public boolean checkBlackBishop(int i, int j){
         if((abs(i - last_i) == abs(j - last_j)) && blackEats(i, j)){
+            if(i > last_i){
+                if(j > last_j){
+                    for (int k = 1; k < j-last_j; k++){
+                        if (twoDimArray[last_i + k][last_j + k].equals("p")||
+                                twoDimArray[last_i + k][last_j + k].equals("n")||
+                                twoDimArray[last_i + k][last_j + k].equals("b")||
+                                twoDimArray[last_i + k][last_j + k].equals("r")||
+                                twoDimArray[last_i + k][last_j + k].equals("q")||
+                                twoDimArray[last_i + k][last_j + k].equals("k")||
+                                twoDimArray[last_i + k][last_j + k].equals("P")||
+                                twoDimArray[last_i + k][last_j + k].equals("N")||
+                                twoDimArray[last_i + k][last_j + k].equals("B")||
+                                twoDimArray[last_i + k][last_j + k].equals("R")||
+                                twoDimArray[last_i + k][last_j + k].equals("Q")||
+                                twoDimArray[last_i + k][last_j + k].equals("K")){
+                            return false;
+                        }
+                    }
+                }else{
+                    for (int k = 1; k < last_j - j; k++){
+                        if (twoDimArray[last_i + k][last_j + k].equals("p")||
+                                twoDimArray[last_i + k][last_j - k].equals("n")||
+                                twoDimArray[last_i + k][last_j - k].equals("b")||
+                                twoDimArray[last_i + k][last_j - k].equals("r")||
+                                twoDimArray[last_i + k][last_j - k].equals("q")||
+                                twoDimArray[last_i + k][last_j - k].equals("k")||
+                                twoDimArray[last_i + k][last_j - k].equals("P")||
+                                twoDimArray[last_i + k][last_j - k].equals("N")||
+                                twoDimArray[last_i + k][last_j - k].equals("B")||
+                                twoDimArray[last_i + k][last_j - k].equals("R")||
+                                twoDimArray[last_i + k][last_j - k].equals("Q")||
+                                twoDimArray[last_i + k][last_j - k].equals("K")){
+                            return false;
+                        }
+                    }
+                }
+            }else{
+                if(j > last_j){
+                    for (int k = 1; k < j - last_j; k++){
+                        if (twoDimArray[last_i - k][last_j + k].equals("p")||
+                                twoDimArray[last_i - k][last_j + k].equals("n")||
+                                twoDimArray[last_i - k][last_j + k].equals("b")||
+                                twoDimArray[last_i - k][last_j + k].equals("r")||
+                                twoDimArray[last_i - k][last_j + k].equals("q")||
+                                twoDimArray[last_i - k][last_j + k].equals("k")||
+                                twoDimArray[last_i - k][last_j + k].equals("P")||
+                                twoDimArray[last_i - k][last_j + k].equals("N")||
+                                twoDimArray[last_i - k][last_j + k].equals("B")||
+                                twoDimArray[last_i - k][last_j + k].equals("R")||
+                                twoDimArray[last_i - k][last_j + k].equals("Q")||
+                                twoDimArray[last_i - k][last_j + k].equals("K")){
+                            return false;
+                        }
+                    }
+                }else{
+                    for (int k = 1; k < last_j - j; k++){
+                        if (twoDimArray[last_i - k][last_j + k].equals("p")||
+                                twoDimArray[last_i - k][last_j - k].equals("n")||
+                                twoDimArray[last_i - k][last_j - k].equals("b")||
+                                twoDimArray[last_i - k][last_j - k].equals("r")||
+                                twoDimArray[last_i - k][last_j - k].equals("q")||
+                                twoDimArray[last_i - k][last_j - k].equals("k")||
+                                twoDimArray[last_i - k][last_j - k].equals("P")||
+                                twoDimArray[last_i - k][last_j - k].equals("N")||
+                                twoDimArray[last_i - k][last_j - k].equals("B")||
+                                twoDimArray[last_i - k][last_j - k].equals("R")||
+                                twoDimArray[last_i - k][last_j - k].equals("Q")||
+                                twoDimArray[last_i - k][last_j - k].equals("K")){
+                            return false;
+                        }
+                    }
+                }
+            }
             if (twoDimArray[i][j].equals("P") ||
                     twoDimArray[i][j].equals("N") ||
                     twoDimArray[i][j].equals("B") ||
@@ -756,8 +877,23 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
             if (last_i == 7 && last_j == 7){
                 rightToCastleShortWhite = false;
             }
+            if (twoDimArray[i][j].equals("p") ||
+                    twoDimArray[i][j].equals("n") ||
+                    twoDimArray[i][j].equals("b") ||
+                    twoDimArray[i][j].equals("r") ||
+                    twoDimArray[i][j].equals("q") ||
+                    twoDimArray[i][j].equals("k")){
+                if (!notNotate) {
+                    pgn += count + ". R" + "x" + getCoordinate(j, i) + " ";
+                    count += 1;
+                }
+            }else{
+                if (!notNotate) {
+                    pgn += count + ". R" + getCoordinate(j, i) + " ";
+                    count += 1;
+                }
+            }
             return true;
-
         }else{
             return false;
         }
@@ -844,6 +980,20 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
             if (last_i == 0 && last_j == 7){
                 rightToCastleShortBlack = false;
             }
+            if (twoDimArray[i][j].equals("P") ||
+                    twoDimArray[i][j].equals("N") ||
+                    twoDimArray[i][j].equals("B") ||
+                    twoDimArray[i][j].equals("R") ||
+                    twoDimArray[i][j].equals("Q") ||
+                    twoDimArray[i][j].equals("K")){
+                if (!notNotate) {
+                    pgn += "Rx" + getCoordinate(j, i) + " ";
+                }
+            }else{
+                if (!notNotate) {
+                    pgn += "R" + getCoordinate(j, i) + " ";
+                }
+            }
             return true;
         }else{
             return false;
@@ -852,6 +1002,153 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
     public boolean checkWhiteQueen(int i, int j){
         if(((abs(i - last_i) == abs(j - last_j)) || ((i == last_i) || (j == last_j))) && whiteEats(i, j)){
+            if (i == last_i){
+                if (j > last_j){
+                    for (int k = 1; k < j-last_j; k++){
+                        if (twoDimArray[i][last_j + k].equals("p")||
+                                twoDimArray[i][last_j + k].equals("n")||
+                                twoDimArray[i][last_j + k].equals("b")||
+                                twoDimArray[i][last_j + k].equals("r")||
+                                twoDimArray[i][last_j + k].equals("q")||
+                                twoDimArray[i][last_j + k].equals("k")||
+                                twoDimArray[i][last_j + k].equals("P")||
+                                twoDimArray[i][last_j + k].equals("N")||
+                                twoDimArray[i][last_j + k].equals("B")||
+                                twoDimArray[i][last_j + k].equals("R")||
+                                twoDimArray[i][last_j + k].equals("Q")||
+                                twoDimArray[i][last_j + k].equals("K")){
+                            return false;
+                        }
+                    }
+                }else{
+                    for (int k = 1; k < last_j-j; k++){
+                        if (twoDimArray[i][j + k].equals("p")||
+                                twoDimArray[i][j + k].equals("n")||
+                                twoDimArray[i][j + k].equals("b")||
+                                twoDimArray[i][j + k].equals("r")||
+                                twoDimArray[i][j + k].equals("q")||
+                                twoDimArray[i][j + k].equals("k")||
+                                twoDimArray[i][j + k].equals("P")||
+                                twoDimArray[i][j + k].equals("N")||
+                                twoDimArray[i][j + k].equals("B")||
+                                twoDimArray[i][j + k].equals("R")||
+                                twoDimArray[i][j + k].equals("Q")||
+                                twoDimArray[i][j + k].equals("K")){
+                            return false;
+                        }
+                    }
+                }
+            }
+            if (j == last_j){
+                if (i > last_i){
+                    for (int k = 1; k < i-last_i; k++){
+                        if (twoDimArray[last_i + k][j].equals("p")||
+                                twoDimArray[last_i + k][j].equals("n")||
+                                twoDimArray[last_i + k][j].equals("b")||
+                                twoDimArray[last_i + k][j].equals("r")||
+                                twoDimArray[last_i + k][j].equals("q")||
+                                twoDimArray[last_i + k][j].equals("k")||
+                                twoDimArray[last_i + k][j].equals("P")||
+                                twoDimArray[last_i + k][j].equals("N")||
+                                twoDimArray[last_i + k][j].equals("B")||
+                                twoDimArray[last_i + k][j].equals("R")||
+                                twoDimArray[last_i + k][j].equals("Q")||
+                                twoDimArray[last_i + k][j].equals("K")){
+                            return false;
+                        }
+                    }
+                }else{
+                    for (int k = 1; k < last_i-i; k++){
+                        if (twoDimArray[i + k][j].equals("p")||
+                                twoDimArray[i + k][j].equals("n")||
+                                twoDimArray[i + k][j].equals("b")||
+                                twoDimArray[i + k][j].equals("r")||
+                                twoDimArray[i + k][j].equals("q")||
+                                twoDimArray[i + k][j].equals("k")||
+                                twoDimArray[i + k][j].equals("P")||
+                                twoDimArray[i + k][j].equals("N")||
+                                twoDimArray[i + k][j].equals("B")||
+                                twoDimArray[i + k][j].equals("R")||
+                                twoDimArray[i + k][j].equals("Q")||
+                                twoDimArray[i + k][j].equals("K")){
+                            return false;
+                        }
+                    }
+                }
+            }
+            if(i > last_i){
+                if(j > last_j){
+                    for (int k = 1; k < j-last_j; k++){
+                        if (twoDimArray[last_i + k][last_j + k].equals("p")||
+                                twoDimArray[last_i + k][last_j + k].equals("n")||
+                                twoDimArray[last_i + k][last_j + k].equals("b")||
+                                twoDimArray[last_i + k][last_j + k].equals("r")||
+                                twoDimArray[last_i + k][last_j + k].equals("q")||
+                                twoDimArray[last_i + k][last_j + k].equals("k")||
+                                twoDimArray[last_i + k][last_j + k].equals("P")||
+                                twoDimArray[last_i + k][last_j + k].equals("N")||
+                                twoDimArray[last_i + k][last_j + k].equals("B")||
+                                twoDimArray[last_i + k][last_j + k].equals("R")||
+                                twoDimArray[last_i + k][last_j + k].equals("Q")||
+                                twoDimArray[last_i + k][last_j + k].equals("K")){
+                            return false;
+                        }
+                    }
+                }else{
+                    for (int k = 1; k < last_j - j; k++){
+                        if (twoDimArray[last_i + k][last_j + k].equals("p")||
+                                twoDimArray[last_i + k][last_j - k].equals("n")||
+                                twoDimArray[last_i + k][last_j - k].equals("b")||
+                                twoDimArray[last_i + k][last_j - k].equals("r")||
+                                twoDimArray[last_i + k][last_j - k].equals("q")||
+                                twoDimArray[last_i + k][last_j - k].equals("k")||
+                                twoDimArray[last_i + k][last_j - k].equals("P")||
+                                twoDimArray[last_i + k][last_j - k].equals("N")||
+                                twoDimArray[last_i + k][last_j - k].equals("B")||
+                                twoDimArray[last_i + k][last_j - k].equals("R")||
+                                twoDimArray[last_i + k][last_j - k].equals("Q")||
+                                twoDimArray[last_i + k][last_j - k].equals("K")){
+                            return false;
+                        }
+                    }
+                }
+            }else{
+                if(j > last_j){
+                    for (int k = 1; k < j - last_j; k++){
+                        if (twoDimArray[last_i - k][last_j + k].equals("p")||
+                                twoDimArray[last_i - k][last_j + k].equals("n")||
+                                twoDimArray[last_i - k][last_j + k].equals("b")||
+                                twoDimArray[last_i - k][last_j + k].equals("r")||
+                                twoDimArray[last_i - k][last_j + k].equals("q")||
+                                twoDimArray[last_i - k][last_j + k].equals("k")||
+                                twoDimArray[last_i - k][last_j + k].equals("P")||
+                                twoDimArray[last_i - k][last_j + k].equals("N")||
+                                twoDimArray[last_i - k][last_j + k].equals("B")||
+                                twoDimArray[last_i - k][last_j + k].equals("R")||
+                                twoDimArray[last_i - k][last_j + k].equals("Q")||
+                                twoDimArray[last_i - k][last_j + k].equals("K")){
+                            return false;
+                        }
+                    }
+                }else{
+                    for (int k = 1; k < last_j - j; k++){
+                        if (twoDimArray[last_i - k][last_j + k].equals("p")||
+                                twoDimArray[last_i - k][last_j - k].equals("n")||
+                                twoDimArray[last_i - k][last_j - k].equals("b")||
+                                twoDimArray[last_i - k][last_j - k].equals("r")||
+                                twoDimArray[last_i - k][last_j - k].equals("q")||
+                                twoDimArray[last_i - k][last_j - k].equals("k")||
+                                twoDimArray[last_i - k][last_j - k].equals("P")||
+                                twoDimArray[last_i - k][last_j - k].equals("N")||
+                                twoDimArray[last_i - k][last_j - k].equals("B")||
+                                twoDimArray[last_i - k][last_j - k].equals("R")||
+                                twoDimArray[last_i - k][last_j - k].equals("Q")||
+                                twoDimArray[last_i - k][last_j - k].equals("K")){
+                            return false;
+                        }
+                    }
+                }
+            }
             if (twoDimArray[i][j].equals("p") ||
                     twoDimArray[i][j].equals("n") ||
                     twoDimArray[i][j].equals("b") ||
@@ -876,6 +1173,153 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
     public boolean checkBlackQueen(int i, int j){
         if(((abs(i - last_i) == abs(j - last_j)) || ((i == last_i) || (j == last_j))) && blackEats(i, j)){
+            if (i == last_i){
+                if (j > last_j){
+                    for (int k = 1; k < j-last_j; k++){
+                        if (twoDimArray[i][last_j + k].equals("p")||
+                                twoDimArray[i][last_j + k].equals("n")||
+                                twoDimArray[i][last_j + k].equals("b")||
+                                twoDimArray[i][last_j + k].equals("r")||
+                                twoDimArray[i][last_j + k].equals("q")||
+                                twoDimArray[i][last_j + k].equals("k")||
+                                twoDimArray[i][last_j + k].equals("P")||
+                                twoDimArray[i][last_j + k].equals("N")||
+                                twoDimArray[i][last_j + k].equals("B")||
+                                twoDimArray[i][last_j + k].equals("R")||
+                                twoDimArray[i][last_j + k].equals("Q")||
+                                twoDimArray[i][last_j + k].equals("K")){
+                            return false;
+                        }
+                    }
+                }else{
+                    for (int k = 1; k < last_j-j; k++){
+                        if (twoDimArray[i][j + k].equals("p")||
+                                twoDimArray[i][j + k].equals("n")||
+                                twoDimArray[i][j + k].equals("b")||
+                                twoDimArray[i][j + k].equals("r")||
+                                twoDimArray[i][j + k].equals("q")||
+                                twoDimArray[i][j + k].equals("k")||
+                                twoDimArray[i][j + k].equals("P")||
+                                twoDimArray[i][j + k].equals("N")||
+                                twoDimArray[i][j + k].equals("B")||
+                                twoDimArray[i][j + k].equals("R")||
+                                twoDimArray[i][j + k].equals("Q")||
+                                twoDimArray[i][j + k].equals("K")){
+                            return false;
+                        }
+                    }
+                }
+            }
+            if (j == last_j){
+                if (i > last_i){
+                    for (int k = 1; k < i-last_i; k++){
+                        if (twoDimArray[last_i + k][j].equals("p")||
+                                twoDimArray[last_i + k][j].equals("n")||
+                                twoDimArray[last_i + k][j].equals("b")||
+                                twoDimArray[last_i + k][j].equals("r")||
+                                twoDimArray[last_i + k][j].equals("q")||
+                                twoDimArray[last_i + k][j].equals("k")||
+                                twoDimArray[last_i + k][j].equals("P")||
+                                twoDimArray[last_i + k][j].equals("N")||
+                                twoDimArray[last_i + k][j].equals("B")||
+                                twoDimArray[last_i + k][j].equals("R")||
+                                twoDimArray[last_i + k][j].equals("Q")||
+                                twoDimArray[last_i + k][j].equals("K")){
+                            return false;
+                        }
+                    }
+                }else{
+                    for (int k = 1; k < last_i-i; k++){
+                        if (twoDimArray[i + k][j].equals("p")||
+                                twoDimArray[i + k][j].equals("n")||
+                                twoDimArray[i + k][j].equals("b")||
+                                twoDimArray[i + k][j].equals("r")||
+                                twoDimArray[i + k][j].equals("q")||
+                                twoDimArray[i + k][j].equals("k")||
+                                twoDimArray[i + k][j].equals("P")||
+                                twoDimArray[i + k][j].equals("N")||
+                                twoDimArray[i + k][j].equals("B")||
+                                twoDimArray[i + k][j].equals("R")||
+                                twoDimArray[i + k][j].equals("Q")||
+                                twoDimArray[i + k][j].equals("K")){
+                            return false;
+                        }
+                    }
+                }
+            }
+            if(i > last_i){
+                if(j > last_j){
+                    for (int k = 1; k < j-last_j; k++){
+                        if (twoDimArray[last_i + k][last_j + k].equals("p")||
+                                twoDimArray[last_i + k][last_j + k].equals("n")||
+                                twoDimArray[last_i + k][last_j + k].equals("b")||
+                                twoDimArray[last_i + k][last_j + k].equals("r")||
+                                twoDimArray[last_i + k][last_j + k].equals("q")||
+                                twoDimArray[last_i + k][last_j + k].equals("k")||
+                                twoDimArray[last_i + k][last_j + k].equals("P")||
+                                twoDimArray[last_i + k][last_j + k].equals("N")||
+                                twoDimArray[last_i + k][last_j + k].equals("B")||
+                                twoDimArray[last_i + k][last_j + k].equals("R")||
+                                twoDimArray[last_i + k][last_j + k].equals("Q")||
+                                twoDimArray[last_i + k][last_j + k].equals("K")){
+                            return false;
+                        }
+                    }
+                }else{
+                    for (int k = 1; k < last_j - j; k++){
+                        if (twoDimArray[last_i + k][last_j + k].equals("p")||
+                                twoDimArray[last_i + k][last_j - k].equals("n")||
+                                twoDimArray[last_i + k][last_j - k].equals("b")||
+                                twoDimArray[last_i + k][last_j - k].equals("r")||
+                                twoDimArray[last_i + k][last_j - k].equals("q")||
+                                twoDimArray[last_i + k][last_j - k].equals("k")||
+                                twoDimArray[last_i + k][last_j - k].equals("P")||
+                                twoDimArray[last_i + k][last_j - k].equals("N")||
+                                twoDimArray[last_i + k][last_j - k].equals("B")||
+                                twoDimArray[last_i + k][last_j - k].equals("R")||
+                                twoDimArray[last_i + k][last_j - k].equals("Q")||
+                                twoDimArray[last_i + k][last_j - k].equals("K")){
+                            return false;
+                        }
+                    }
+                }
+            }else{
+                if(j > last_j){
+                    for (int k = 1; k < j - last_j; k++){
+                        if (twoDimArray[last_i - k][last_j + k].equals("p")||
+                                twoDimArray[last_i - k][last_j + k].equals("n")||
+                                twoDimArray[last_i - k][last_j + k].equals("b")||
+                                twoDimArray[last_i - k][last_j + k].equals("r")||
+                                twoDimArray[last_i - k][last_j + k].equals("q")||
+                                twoDimArray[last_i - k][last_j + k].equals("k")||
+                                twoDimArray[last_i - k][last_j + k].equals("P")||
+                                twoDimArray[last_i - k][last_j + k].equals("N")||
+                                twoDimArray[last_i - k][last_j + k].equals("B")||
+                                twoDimArray[last_i - k][last_j + k].equals("R")||
+                                twoDimArray[last_i - k][last_j + k].equals("Q")||
+                                twoDimArray[last_i - k][last_j + k].equals("K")){
+                            return false;
+                        }
+                    }
+                }else{
+                    for (int k = 1; k < last_j - j; k++){
+                        if (twoDimArray[last_i - k][last_j + k].equals("p")||
+                                twoDimArray[last_i - k][last_j - k].equals("n")||
+                                twoDimArray[last_i - k][last_j - k].equals("b")||
+                                twoDimArray[last_i - k][last_j - k].equals("r")||
+                                twoDimArray[last_i - k][last_j - k].equals("q")||
+                                twoDimArray[last_i - k][last_j - k].equals("k")||
+                                twoDimArray[last_i - k][last_j - k].equals("P")||
+                                twoDimArray[last_i - k][last_j - k].equals("N")||
+                                twoDimArray[last_i - k][last_j - k].equals("B")||
+                                twoDimArray[last_i - k][last_j - k].equals("R")||
+                                twoDimArray[last_i - k][last_j - k].equals("Q")||
+                                twoDimArray[last_i - k][last_j - k].equals("K")){
+                            return false;
+                        }
+                    }
+                }
+            }
             if (twoDimArray[i][j].equals("P") ||
                     twoDimArray[i][j].equals("N") ||
                     twoDimArray[i][j].equals("B") ||
@@ -1056,7 +1500,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                         }
                     }
                 }
-                if (checkingTwoDimArray[i][j].equals("Q")){
+                /*if (checkingTwoDimArray[i][j].equals("Q")){
                     for (int k = 0; k < 8; k++){
                         for (int l = 0; l < 8; l++){
                             if (checkWhiteQueen(k, l)){
@@ -1068,7 +1512,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                             }
                         }
                     }
-                }
+                }*/
             }
         }
         /*for (int i = 0; i < twoDimArray.length; i++) {
