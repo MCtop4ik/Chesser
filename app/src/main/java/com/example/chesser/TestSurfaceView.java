@@ -56,7 +56,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     static String wm = "";
     static boolean blackKingUnderCheck = false;
 
-    public static String[][] twoDimArray = {
+    static String[][] twoDimArray = {
             {"r", "n", "b", "q", "k", "b", "n", "r"},
             {"p", "p", "p", "p", "p", "p", "p", "p"},
             {"", "", "", "", "", "", "", ""},
@@ -251,7 +251,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     {"P", "P", "P", "P", "P", "P", "P", "P"},
                     {"P", "P", "P", "P", "P", "P", "P", "P"},
                     {""}};
-        }else if(MainActivity.game.equals("normal")){
+        }else if(MainActivity.game.equals("normal") && pgn.equals("")){
             twoDimArray = new String[][]{
                     {"r", "n", "b", "q", "k", "b", "n", "r"},
                     {"p", "p", "p", "p", "p", "p", "p", "p"},
@@ -464,7 +464,6 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         }
 
     }
-
     public String getLetter(int a){
         System.out.println(a);
         switch (a) {
@@ -626,7 +625,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     }
                 }else{
                     for (int k = 1; k < last_j - j; k++){
-                        if (twoDimArray[last_i + k][last_j + k].equals("p")||
+                        if (twoDimArray[last_i + k][last_j - k].equals("p")||
                                 twoDimArray[last_i + k][last_j - k].equals("n")||
                                 twoDimArray[last_i + k][last_j - k].equals("b")||
                                 twoDimArray[last_i + k][last_j - k].equals("r")||
@@ -662,7 +661,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     }
                 }else{
                     for (int k = 1; k < last_j - j; k++){
-                        if (twoDimArray[last_i - k][last_j + k].equals("p")||
+                        if (twoDimArray[last_i - k][last_j - k].equals("p")||
                                 twoDimArray[last_i - k][last_j - k].equals("n")||
                                 twoDimArray[last_i - k][last_j - k].equals("b")||
                                 twoDimArray[last_i - k][last_j - k].equals("r")||
@@ -723,7 +722,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     }
                 }else{
                     for (int k = 1; k < last_j - j; k++){
-                        if (twoDimArray[last_i + k][last_j + k].equals("p")||
+                        if (twoDimArray[last_i + k][last_j - k].equals("p")||
                                 twoDimArray[last_i + k][last_j - k].equals("n")||
                                 twoDimArray[last_i + k][last_j - k].equals("b")||
                                 twoDimArray[last_i + k][last_j - k].equals("r")||
@@ -759,7 +758,9 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     }
                 }else{
                     for (int k = 1; k < last_j - j; k++){
-                        if (twoDimArray[last_i - k][last_j + k].equals("p")||
+                        System.out.println(last_i - k);
+                        System.out.println(last_j - k);
+                        if (twoDimArray[last_i - k][last_j - k].equals("p")||
                                 twoDimArray[last_i - k][last_j - k].equals("n")||
                                 twoDimArray[last_i - k][last_j - k].equals("b")||
                                 twoDimArray[last_i - k][last_j - k].equals("r")||
@@ -1096,7 +1097,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     }
                 }else{
                     for (int k = 1; k < last_j - j; k++){
-                        if (twoDimArray[last_i + k][last_j + k].equals("p")||
+                        if (twoDimArray[last_i + k][last_j - k].equals("p")||
                                 twoDimArray[last_i + k][last_j - k].equals("n")||
                                 twoDimArray[last_i + k][last_j - k].equals("b")||
                                 twoDimArray[last_i + k][last_j - k].equals("r")||
@@ -1132,7 +1133,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     }
                 }else{
                     for (int k = 1; k < last_j - j; k++){
-                        if (twoDimArray[last_i - k][last_j + k].equals("p")||
+                        if (twoDimArray[last_i - k][last_j - k].equals("p")||
                                 twoDimArray[last_i - k][last_j - k].equals("n")||
                                 twoDimArray[last_i - k][last_j - k].equals("b")||
                                 twoDimArray[last_i - k][last_j - k].equals("r")||
@@ -1267,7 +1268,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     }
                 }else{
                     for (int k = 1; k < last_j - j; k++){
-                        if (twoDimArray[last_i + k][last_j + k].equals("p")||
+                        if (twoDimArray[last_i + k][last_j - k].equals("p")||
                                 twoDimArray[last_i + k][last_j - k].equals("n")||
                                 twoDimArray[last_i + k][last_j - k].equals("b")||
                                 twoDimArray[last_i + k][last_j - k].equals("r")||
@@ -1303,7 +1304,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     }
                 }else{
                     for (int k = 1; k < last_j - j; k++){
-                        if (twoDimArray[last_i - k][last_j + k].equals("p")||
+                        if (twoDimArray[last_i - k][last_j - k].equals("p")||
                                 twoDimArray[last_i - k][last_j - k].equals("n")||
                                 twoDimArray[last_i - k][last_j - k].equals("b")||
                                 twoDimArray[last_i - k][last_j - k].equals("r")||
@@ -1473,6 +1474,10 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         rightToCastleLongBlack = false;
     }
 
+    public boolean pseudoLegalMoveRook(){
+        return true;
+    }
+
     public void enPassantWhite(){
 
     }
@@ -1486,25 +1491,12 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         illegalMovesW.clear();
         blackKingUnderCheck = false;
         for(int i = 0; i < 8; i++){
-            for (int j = 0; j < 8; j++){
-                if (checkingTwoDimArray[i][j].equals("N")){
-                    for (int k = 0; k < 8; k++){
-                        for (int l = 0; l < 8; l++){
-                            if (checkWhiteKnight(k, l)){
-                                 if (checkingTwoDimArray[k][l].equals("k")){
-                                     blackKingUnderCheck = true;
-                                    System.out.println("Check");
-                                    illegalMovesW.add(k + ":" + l);
-                                }
-                            }
-                        }
-                    }
-                }
-                /*if (checkingTwoDimArray[i][j].equals("Q")){
-                    for (int k = 0; k < 8; k++){
-                        for (int l = 0; l < 8; l++){
-                            if (checkWhiteQueen(k, l)){
-                                if (checkingTwoDimArray[k][l].equals("k")){
+            for (int j = 0; j < 8; j++) {
+                if (checkingTwoDimArray[i][j].equals("N")) {
+                    for (int k = 0; k < 8; k++) {
+                        for (int l = 0; l < 8; l++) {
+                            if (checkWhiteKnight(k, l)) {
+                                if (checkingTwoDimArray[k][l].equals("k")) {
                                     blackKingUnderCheck = true;
                                     System.out.println("Check");
                                     illegalMovesW.add(k + ":" + l);
@@ -1512,15 +1504,9 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                             }
                         }
                     }
-                }*/
+                }
             }
         }
-        /*for (int i = 0; i < twoDimArray.length; i++) {
-            for (int j = 0; j < twoDimArray[i].length; j++) {
-                Log.i("first", checkingTwoDimArray[i][j]);
-                Log.i("second", twoDimArray[i][j]);
-            }
-        }*/
         notNotate = false;
     }
 

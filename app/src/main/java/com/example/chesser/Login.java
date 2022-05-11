@@ -17,7 +17,7 @@ public class Login extends AppCompatActivity {
     EditText password;
     Intent started;
     SharedPreferences mSettings;
-
+    public static String infoLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,7 @@ public class Login extends AppCompatActivity {
                 }else if(!mSettings.getString("Name", "").equals("")){
                     if (mSettings.getString("Name", "").equals(login.getText().toString())
                     && mSettings.getString("Password", "").equals(password.getText().toString())){
+                        infoLogin = login.getText().toString();
                         started = new Intent(Login.this, Main.class);
                         startActivity(started);
                     }

@@ -56,6 +56,10 @@ public class Codes extends AppCompatActivity {
                 }else if(promo.getText().toString().equals(">>>opening")){
                     open = new Intent(Codes.this, Openings.class);
                     startActivity(open);
+                }else if(promo.getText().toString().equals(">>>clearPGN")){
+                    TestSurfaceView.pgn = "";
+                    TestSurfaceView.queue = 0;
+                    TestSurfaceView.count = 1;
                 }
             }
         });
