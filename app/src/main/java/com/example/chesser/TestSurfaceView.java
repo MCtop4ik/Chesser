@@ -66,16 +66,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
             {"P", "P", "P", "P", "P", "P", "P", "P"},
             {"R", "N", "B", "Q", "K", "B", "N", "R"},
             {""}};
-    public static String[][] checkingTwoDimArray = {
-            {"r", "n", "b", "q", "k", "b", "n", "r"},
-            {"p", "p", "p", "p", "p", "p", "p", "p"},
-            {"", "", "", "", "", "", "", ""},
-            {"", "", "", "", "", "", "", ""},
-            {"", "", "", "", "", "", "", ""},
-            {"", "", "", "", "", "", "", ""},
-            {"P", "P", "P", "P", "P", "P", "P", "P"},
-            {"R", "N", "B", "Q", "K", "B", "N", "R"},
-            {""}};
+    public static String[][] checkingTwoDimArray = twoDimArray;
 
     private final Bitmap bit_k;
     private final Bitmap bit_p;
@@ -293,8 +284,11 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                         last_i = i;
                         last_j = j;
                         taken_piece = twoDimArray[i][j];
+                        checkingTwoDimArray = twoDimArray;
+                        checkLegalMovesWhite();
                     } else {
                         if (last_i != i || last_j != j){
+                            Desk d = new Desk();
                             if (taken_piece.equals("P") && checkWhitePawn(i, j) && queue == 0) {
                                 twoDimArray[i][j] = taken_piece;
                                 if (i == 0){
@@ -420,11 +414,11 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                                     && twoDimArray[0][6].equals("") && twoDimArray[0][7].equals("r")
                                     && twoDimArray[0][3].equals("k") && twoDimArray[0][4].equals("")
                                     && swi == 1){
+                                checkingTwoDimArray = twoDimArray;
+                                checkLegalMovesWhite();
                                 castleSwitchBlackLong();
                                 queue = 0;
                             }
-                            checkLegalMovesWhite();
-                            checkingTwoDimArray = twoDimArray;
                             System.out.println(illegalMovesW.toString());
                             last_j = 0;
                             last_i = 8;
@@ -592,11 +586,6 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     pgn += "N" + getCoordinate(j, i) + " ";
                 }
             }
-            checkLegalMovesWhite();
-                if (blackKingUnderCheck){
-                    System.out.println("its obviosly on check");
-                    return true;
-                }
             return true;
         }else{
             return false;
@@ -1389,17 +1378,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     }
 
     public boolean whiteEats(int i, int j){
-        if (twoDimArray[i][j].equals("p") ||
-                twoDimArray[i][j].equals("n") ||
-                twoDimArray[i][j].equals("b") ||
-                twoDimArray[i][j].equals("r") ||
-                twoDimArray[i][j].equals("q") ||
-                twoDimArray[i][j].equals("k") ||
-                twoDimArray[i][j].equals("")){
-            return true;
-        }else{
-            return false;
-        }
+        return (twoDimArray[i][j].length() == 0) || Character.isLowerCase(twoDimArray[i][j].charAt(0));
     }
 
     public boolean blackEats(int i, int j){
@@ -1473,11 +1452,6 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         twoDimArray[0][7] = "";
         rightToCastleLongBlack = false;
     }
-
-    public boolean pseudoLegalMoveRook(){
-        return true;
-    }
-
     public void enPassantWhite(){
 
     }
@@ -1490,13 +1464,13 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         notNotate = true;
         illegalMovesW.clear();
         blackKingUnderCheck = false;
-        for(int i = 0; i < 8; i++){
-            for (int j = 0; j < 8; j++) {
-                if (checkingTwoDimArray[i][j].equals("N")) {
+        for(int m = 0; m < 8; m++){
+            for (int n = 0; n < 8; n++) {
+                if (twoDimArray[m][n].equals("N")) {
                     for (int k = 0; k < 8; k++) {
                         for (int l = 0; l < 8; l++) {
                             if (checkWhiteKnight(k, l)) {
-                                if (checkingTwoDimArray[k][l].equals("k")) {
+                                if (twoDimArray[k][l].equals("k")) {
                                     blackKingUnderCheck = true;
                                     System.out.println("Check");
                                     illegalMovesW.add(k + ":" + l);
@@ -1551,103 +1525,31 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
             }else {
                 color_sq = getResources().getColor(R.color.sea);
             }
-            Bitmap K = Bitmap.createScaledBitmap(bit_k,
-                    draw_width,
-                    draw_height,
-                    false);
-            Bitmap P = Bitmap.createScaledBitmap(bit_p,
-                    draw_width,
-                    draw_height,
-                    false);
-            Bitmap N = Bitmap.createScaledBitmap(bit_n,
-                    draw_width,
-                    draw_height,
-                    false);
-            Bitmap B = Bitmap.createScaledBitmap(bit_b,
-                    draw_width,
-                    draw_height,
-                    false);
-            Bitmap R = Bitmap.createScaledBitmap(bit_r,
-                    draw_width,
-                    draw_height,
-                    false);
-            Bitmap Q = Bitmap.createScaledBitmap(bit_q,
-                    draw_width,
-                    draw_height,
-                    false);
-            Bitmap k = Bitmap.createScaledBitmap(bit_kb,
-                    draw_width,
-                    draw_height,
-                    false);
-            Bitmap p = Bitmap.createScaledBitmap(bit_pb,
-                    draw_width,
-                    draw_height,
-                    false);
-            Bitmap n = Bitmap.createScaledBitmap(bit_nb,
-                    draw_width,
-                    draw_height,
-                    false);
-            Bitmap b = Bitmap.createScaledBitmap(bit_bb,
-                    draw_width,
-                    draw_height,
-                    false);
-            Bitmap r = Bitmap.createScaledBitmap(bit_rb,
-                    draw_width,
-                    draw_height,
-                    false);
-            Bitmap q = Bitmap.createScaledBitmap(bit_qb,
-                    draw_width,
-                    draw_height,
-                    false);
+            Bitmap K = Bitmap.createScaledBitmap(bit_k, draw_width, draw_height, false);
+            Bitmap P = Bitmap.createScaledBitmap(bit_p, draw_width, draw_height, false);
+            Bitmap N = Bitmap.createScaledBitmap(bit_n, draw_width, draw_height, false);
+            Bitmap B = Bitmap.createScaledBitmap(bit_b, draw_width, draw_height, false);
+            Bitmap R = Bitmap.createScaledBitmap(bit_r, draw_width, draw_height, false);
+            Bitmap Q = Bitmap.createScaledBitmap(bit_q, draw_width, draw_height, false);
+            Bitmap k = Bitmap.createScaledBitmap(bit_kb, draw_width, draw_height, false);
+            Bitmap p = Bitmap.createScaledBitmap(bit_pb, draw_width, draw_height, false);
+            Bitmap n = Bitmap.createScaledBitmap(bit_nb, draw_width, draw_height, false);
+            Bitmap b = Bitmap.createScaledBitmap(bit_bb, draw_width, draw_height, false);
+            Bitmap r = Bitmap.createScaledBitmap(bit_rb, draw_width, draw_height, false);
+            Bitmap q = Bitmap.createScaledBitmap(bit_qb, draw_width, draw_height, false);
             if (switcher.equals("BLACK") && MainActivity.game.equals("normal")){
-                K = Bitmap.createScaledBitmap(bit_kb,
-                        draw_width,
-                        draw_width,
-                        false);
-                P = Bitmap.createScaledBitmap(bit_pb,
-                        draw_width,
-                        draw_width,
-                        false);
-                N = Bitmap.createScaledBitmap(bit_nb,
-                        draw_width,
-                        draw_width,
-                        false);
-                B = Bitmap.createScaledBitmap(bit_bb,
-                        draw_width,
-                        draw_width,
-                        false);
-                R = Bitmap.createScaledBitmap(bit_rb,
-                        draw_width,
-                        draw_width,
-                        false);
-                Q = Bitmap.createScaledBitmap(bit_qb,
-                        draw_width,
-                        draw_width,
-                        false);
-                k = Bitmap.createScaledBitmap(bit_k,
-                        draw_width,
-                        draw_width,
-                        false);
-                p = Bitmap.createScaledBitmap(bit_p,
-                        draw_width,
-                        draw_width,
-                        false);
-                n = Bitmap.createScaledBitmap(bit_n,
-                        draw_width,
-                        draw_width,
-                        false);
-                b = Bitmap.createScaledBitmap(bit_b,
-                        draw_width,
-                        draw_width,
-                        false);
-                r = Bitmap.createScaledBitmap(bit_r,
-                        draw_width,
-                        draw_width,
-                        false);
-                q = Bitmap.createScaledBitmap(bit_q,
-                        draw_width,
-                        draw_width,
-                        false);
+                K = Bitmap.createScaledBitmap(bit_kb, draw_width, draw_width, false);
+                P = Bitmap.createScaledBitmap(bit_pb, draw_width, draw_width, false);
+                N = Bitmap.createScaledBitmap(bit_nb, draw_width, draw_width, false);
+                B = Bitmap.createScaledBitmap(bit_bb, draw_width, draw_width, false);
+                R = Bitmap.createScaledBitmap(bit_rb, draw_width, draw_width, false);
+                Q = Bitmap.createScaledBitmap(bit_qb, draw_width, draw_width, false);
+                k = Bitmap.createScaledBitmap(bit_k, draw_width, draw_width, false);
+                p = Bitmap.createScaledBitmap(bit_p, draw_width, draw_width, false);
+                n = Bitmap.createScaledBitmap(bit_n, draw_width, draw_width, false);
+                b = Bitmap.createScaledBitmap(bit_b, draw_width, draw_width, false);
+                r = Bitmap.createScaledBitmap(bit_r, draw_width, draw_width, false);
+                q = Bitmap.createScaledBitmap(bit_q, draw_width, draw_width, false);
             }
 
             if (canvas!=null) {
@@ -1711,11 +1613,12 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                             }
                         }
                     }
-
                     while (last_x == x || last_y == y){
                         II();
                     }
                     movePiece();
+                    checkingTwoDimArray = twoDimArray;
+                    checkLegalMovesWhite();
                     if (colorfully.equals("sea") || colorfully.equals("turkish")){
                         paint_circles.setColor(Color.RED);
                     }else if (colorfully.equals("raspberry")){
@@ -1733,7 +1636,6 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     canvas.drawText(wm, 20, draw_width / 2 +60, FontPaint);
                     canvas.drawCircle(last_x, last_y, 10 , paint_circles);
                     FontPaint.setColor(Color.BLUE);
-                    canvas.drawText(pgn, 20, draw_width * 9 + draw_width / 2 + 60, FontPaint);
                 }finally{
                     getHolder().unlockCanvasAndPost(canvas);
                 }
