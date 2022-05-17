@@ -55,6 +55,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     static String new_name = " ";
     static String wm = "";
     static boolean blackKingUnderCheck = false;
+    Desk d = new Desk();
 
     static String[][] twoDimArray = {
             {"r", "n", "b", "q", "k", "b", "n", "r"},
@@ -66,7 +67,16 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
             {"P", "P", "P", "P", "P", "P", "P", "P"},
             {"R", "N", "B", "Q", "K", "B", "N", "R"},
             {""}};
-    public static String[][] checkingTwoDimArray = twoDimArray;
+    public static String[][] checkingTwoDimArray = {
+            {"r", "n", "b", "q", "k", "b", "n", "r"},
+            {"p", "p", "p", "p", "p", "p", "p", "p"},
+            {"", "", "", "", "", "", "", ""},
+            {"", "", "", "", "", "", "", ""},
+            {"", "", "", "", "", "", "", ""},
+            {"", "", "", "", "", "", "", ""},
+            {"P", "P", "P", "P", "P", "P", "P", "P"},
+            {"R", "N", "B", "Q", "K", "B", "N", "R"},
+            {""}};
 
     private final Bitmap bit_k;
     private final Bitmap bit_p;
@@ -85,85 +95,92 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     public TestSurfaceView(Context context) {
         super(context);
         getHolder().addCallback(this);
-        if (colorfully.equals("first")){
-            bit_k = BitmapFactory.decodeResource(context.getResources(), R.drawable.whiteking);
-            bit_p = BitmapFactory.decodeResource(context.getResources(), R.drawable.pawnwhite);
-            bit_n = BitmapFactory.decodeResource(context.getResources(), R.drawable.knightwhite);
-            bit_b = BitmapFactory.decodeResource(context.getResources(), R.drawable.bishopwhite);
-            bit_r = BitmapFactory.decodeResource(context.getResources(), R.drawable.rookwhite);
-            bit_q = BitmapFactory.decodeResource(context.getResources(), R.drawable.queenwhite);
-            bit_kb = BitmapFactory.decodeResource(context.getResources(), R.drawable.kingblack);
-            bit_pb = BitmapFactory.decodeResource(context.getResources(), R.drawable.pawnblack);
-            bit_nb = BitmapFactory.decodeResource(context.getResources(), R.drawable.knightblack);
-            bit_bb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bishopblack);
-            bit_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.rookblack);
-            bit_qb = BitmapFactory.decodeResource(context.getResources(), R.drawable.queenblack);
-        }else if(colorfully.equals("second")){
-            bit_k = BitmapFactory.decodeResource(context.getResources(), R.drawable.wk1);
-            bit_p = BitmapFactory.decodeResource(context.getResources(), R.drawable.wp1);
-            bit_n = BitmapFactory.decodeResource(context.getResources(), R.drawable.wn1);
-            bit_b = BitmapFactory.decodeResource(context.getResources(), R.drawable.wb1);
-            bit_r = BitmapFactory.decodeResource(context.getResources(), R.drawable.wr1);
-            bit_q = BitmapFactory.decodeResource(context.getResources(), R.drawable.wq1);
-            bit_kb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bk1);
-            bit_pb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bp1);
-            bit_nb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bn1);
-            bit_bb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bb1);
-            bit_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.br1);
-            bit_qb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bq1);
-        }else if(colorfully.equals("third")){
-            bit_k = BitmapFactory.decodeResource(context.getResources(), R.drawable.wk2);
-            bit_p = BitmapFactory.decodeResource(context.getResources(), R.drawable.wp2);
-            bit_n = BitmapFactory.decodeResource(context.getResources(), R.drawable.wn2);
-            bit_b = BitmapFactory.decodeResource(context.getResources(), R.drawable.wb2);
-            bit_r = BitmapFactory.decodeResource(context.getResources(), R.drawable.wr2);
-            bit_q = BitmapFactory.decodeResource(context.getResources(), R.drawable.wq2);
-            bit_kb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bk2);
-            bit_pb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bp2);
-            bit_nb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bn2);
-            bit_bb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bb2);
-            bit_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.br2);
-            bit_qb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bq2);
-        }else if(colorfully.equals("forth")){
-            bit_k = BitmapFactory.decodeResource(context.getResources(), R.drawable.wk);
-            bit_p = BitmapFactory.decodeResource(context.getResources(), R.drawable.wp);
-            bit_n = BitmapFactory.decodeResource(context.getResources(), R.drawable.wn);
-            bit_b = BitmapFactory.decodeResource(context.getResources(), R.drawable.wb);
-            bit_r = BitmapFactory.decodeResource(context.getResources(), R.drawable.wr);
-            bit_q = BitmapFactory.decodeResource(context.getResources(), R.drawable.wq);
-            bit_kb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bk);
-            bit_pb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bp);
-            bit_nb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bn);
-            bit_bb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bb);
-            bit_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.br);
-            bit_qb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bq);
-        }else if(colorfully.equals("fifth")){
-            bit_k = BitmapFactory.decodeResource(context.getResources(), R.drawable.wk14);
-            bit_p = BitmapFactory.decodeResource(context.getResources(), R.drawable.wp14);
-            bit_n = BitmapFactory.decodeResource(context.getResources(), R.drawable.wn14);
-            bit_b = BitmapFactory.decodeResource(context.getResources(), R.drawable.wb14);
-            bit_r = BitmapFactory.decodeResource(context.getResources(), R.drawable.wr14);
-            bit_q = BitmapFactory.decodeResource(context.getResources(), R.drawable.wq14);
-            bit_kb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bk14);
-            bit_pb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bp14);
-            bit_nb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bn14);
-            bit_bb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bb14);
-            bit_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.br14);
-            bit_qb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bq14);
-        }else if (colorfully.equals("3d")) {
-            bit_k = BitmapFactory.decodeResource(context.getResources(), R.drawable.dwk);
-            bit_p = BitmapFactory.decodeResource(context.getResources(), R.drawable.dwp);
-            bit_n = BitmapFactory.decodeResource(context.getResources(), R.drawable.dwn);
-            bit_b = BitmapFactory.decodeResource(context.getResources(), R.drawable.dwb);
-            bit_r = BitmapFactory.decodeResource(context.getResources(), R.drawable.dwr);
-            bit_q = BitmapFactory.decodeResource(context.getResources(), R.drawable.dwq);
-            bit_kb = BitmapFactory.decodeResource(context.getResources(), R.drawable.dbk);
-            bit_pb = BitmapFactory.decodeResource(context.getResources(), R.drawable.dbp);
-            bit_nb = BitmapFactory.decodeResource(context.getResources(), R.drawable.dbnf);
-            bit_bb = BitmapFactory.decodeResource(context.getResources(), R.drawable.dbb);
-            bit_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.dbr);
-            bit_qb = BitmapFactory.decodeResource(context.getResources(), R.drawable.dbq);
-        }else{
+        switch (colorfully) {
+            case "first":
+                bit_k = BitmapFactory.decodeResource(context.getResources(), R.drawable.whiteking);
+                bit_p = BitmapFactory.decodeResource(context.getResources(), R.drawable.pawnwhite);
+                bit_n = BitmapFactory.decodeResource(context.getResources(), R.drawable.knightwhite);
+                bit_b = BitmapFactory.decodeResource(context.getResources(), R.drawable.bishopwhite);
+                bit_r = BitmapFactory.decodeResource(context.getResources(), R.drawable.rookwhite);
+                bit_q = BitmapFactory.decodeResource(context.getResources(), R.drawable.queenwhite);
+                bit_kb = BitmapFactory.decodeResource(context.getResources(), R.drawable.kingblack);
+                bit_pb = BitmapFactory.decodeResource(context.getResources(), R.drawable.pawnblack);
+                bit_nb = BitmapFactory.decodeResource(context.getResources(), R.drawable.knightblack);
+                bit_bb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bishopblack);
+                bit_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.rookblack);
+                bit_qb = BitmapFactory.decodeResource(context.getResources(), R.drawable.queenblack);
+                break;
+            case "second":
+                bit_k = BitmapFactory.decodeResource(context.getResources(), R.drawable.wk1);
+                bit_p = BitmapFactory.decodeResource(context.getResources(), R.drawable.wp1);
+                bit_n = BitmapFactory.decodeResource(context.getResources(), R.drawable.wn1);
+                bit_b = BitmapFactory.decodeResource(context.getResources(), R.drawable.wb1);
+                bit_r = BitmapFactory.decodeResource(context.getResources(), R.drawable.wr1);
+                bit_q = BitmapFactory.decodeResource(context.getResources(), R.drawable.wq1);
+                bit_kb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bk1);
+                bit_pb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bp1);
+                bit_nb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bn1);
+                bit_bb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bb1);
+                bit_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.br1);
+                bit_qb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bq1);
+                break;
+            case "third":
+                bit_k = BitmapFactory.decodeResource(context.getResources(), R.drawable.wk2);
+                bit_p = BitmapFactory.decodeResource(context.getResources(), R.drawable.wp2);
+                bit_n = BitmapFactory.decodeResource(context.getResources(), R.drawable.wn2);
+                bit_b = BitmapFactory.decodeResource(context.getResources(), R.drawable.wb2);
+                bit_r = BitmapFactory.decodeResource(context.getResources(), R.drawable.wr2);
+                bit_q = BitmapFactory.decodeResource(context.getResources(), R.drawable.wq2);
+                bit_kb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bk2);
+                bit_pb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bp2);
+                bit_nb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bn2);
+                bit_bb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bb2);
+                bit_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.br2);
+                bit_qb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bq2);
+                break;
+            case "forth":
+                bit_k = BitmapFactory.decodeResource(context.getResources(), R.drawable.wk);
+                bit_p = BitmapFactory.decodeResource(context.getResources(), R.drawable.wp);
+                bit_n = BitmapFactory.decodeResource(context.getResources(), R.drawable.wn);
+                bit_b = BitmapFactory.decodeResource(context.getResources(), R.drawable.wb);
+                bit_r = BitmapFactory.decodeResource(context.getResources(), R.drawable.wr);
+                bit_q = BitmapFactory.decodeResource(context.getResources(), R.drawable.wq);
+                bit_kb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bk);
+                bit_pb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bp);
+                bit_nb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bn);
+                bit_bb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bb);
+                bit_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.br);
+                bit_qb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bq);
+                break;
+            case "fifth":
+                bit_k = BitmapFactory.decodeResource(context.getResources(), R.drawable.wk14);
+                bit_p = BitmapFactory.decodeResource(context.getResources(), R.drawable.wp14);
+                bit_n = BitmapFactory.decodeResource(context.getResources(), R.drawable.wn14);
+                bit_b = BitmapFactory.decodeResource(context.getResources(), R.drawable.wb14);
+                bit_r = BitmapFactory.decodeResource(context.getResources(), R.drawable.wr14);
+                bit_q = BitmapFactory.decodeResource(context.getResources(), R.drawable.wq14);
+                bit_kb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bk14);
+                bit_pb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bp14);
+                bit_nb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bn14);
+                bit_bb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bb14);
+                bit_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.br14);
+                bit_qb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bq14);
+                break;
+            case "3d":
+                bit_k = BitmapFactory.decodeResource(context.getResources(), R.drawable.dwk);
+                bit_p = BitmapFactory.decodeResource(context.getResources(), R.drawable.dwp);
+                bit_n = BitmapFactory.decodeResource(context.getResources(), R.drawable.dwn);
+                bit_b = BitmapFactory.decodeResource(context.getResources(), R.drawable.dwb);
+                bit_r = BitmapFactory.decodeResource(context.getResources(), R.drawable.dwr);
+                bit_q = BitmapFactory.decodeResource(context.getResources(), R.drawable.dwq);
+                bit_kb = BitmapFactory.decodeResource(context.getResources(), R.drawable.dbk);
+                bit_pb = BitmapFactory.decodeResource(context.getResources(), R.drawable.dbp);
+                bit_nb = BitmapFactory.decodeResource(context.getResources(), R.drawable.dbnf);
+                bit_bb = BitmapFactory.decodeResource(context.getResources(), R.drawable.dbb);
+                bit_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.dbr);
+                bit_qb = BitmapFactory.decodeResource(context.getResources(), R.drawable.dbq);
+                break;
+            default:
                 bit_k = BitmapFactory.decodeResource(context.getResources(), R.drawable.wk3);
                 bit_p = BitmapFactory.decodeResource(context.getResources(), R.drawable.wp3);
                 bit_n = BitmapFactory.decodeResource(context.getResources(), R.drawable.wn3);
@@ -176,49 +193,72 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                 bit_bb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bb3);
                 bit_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.br3);
                 bit_qb = BitmapFactory.decodeResource(context.getResources(), R.drawable.bq3);
-            }
-        if (bg.equals("1")){
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg1);
-        }else if(bg.equals("2")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg2);
-        }else if(bg.equals("3")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg3);
-        }else if(bg.equals("4")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg4);
-        }else if(bg.equals("5")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg5);
-        }else if(bg.equals("6")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg6);
-        }else if(bg.equals("8")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg8);
-        }else if(bg.equals("7")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg7);
-        }else if(bg.equals("9")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg9);
-        }else if(bg.equals("10")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg10);
-        }else if(bg.equals("11")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg11);
-        }else if(bg.equals("12")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg12);
-        }else if(bg.equals("13")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg13);
-        }else if(bg.equals("14")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg14);
-        }else if(bg.equals("15")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg15);
-        }else if(bg.equals("16")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg16);
-        }else if(bg.equals("17")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg17);
-        }else if(bg.equals("18")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg18);
-        }else if(bg.equals("19")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg19);
-        }else if(bg.equals("20")) {
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg20);
-        }else{
-            my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.__20160214_2052636593);
+                break;
+        }
+        switch (bg) {
+            case "1":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg1);
+                break;
+            case "2":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg2);
+                break;
+            case "3":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg3);
+                break;
+            case "4":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg4);
+                break;
+            case "5":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg5);
+                break;
+            case "6":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg6);
+                break;
+            case "8":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg8);
+                break;
+            case "7":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg7);
+                break;
+            case "9":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg9);
+                break;
+            case "10":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg10);
+                break;
+            case "11":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg11);
+                break;
+            case "12":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg12);
+                break;
+            case "13":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg13);
+                break;
+            case "14":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg14);
+                break;
+            case "15":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg15);
+                break;
+            case "16":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg16);
+                break;
+            case "17":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg17);
+                break;
+            case "18":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg18);
+                break;
+            case "19":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg19);
+                break;
+            case "20":
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg20);
+                break;
+            default:
+                my_bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.__20160214_2052636593);
+                break;
         }
     }
 
@@ -284,11 +324,8 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                         last_i = i;
                         last_j = j;
                         taken_piece = twoDimArray[i][j];
-                        checkingTwoDimArray = twoDimArray;
-                        checkLegalMovesWhite();
                     } else {
                         if (last_i != i || last_j != j){
-                            Desk d = new Desk();
                             if (taken_piece.equals("P") && checkWhitePawn(i, j) && queue == 0) {
                                 twoDimArray[i][j] = taken_piece;
                                 if (i == 0){
@@ -305,12 +342,12 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                                 twoDimArray[last_i][last_j] = "";
                                 queue = 0;
                             }
-                            if (taken_piece.equals("N") && checkWhiteKnight(i, j) && queue == 0){
+                            if (taken_piece.equals("N") && d.checkKnight(last_i, last_j, i, j, 1) && queue == 0){
                                 twoDimArray[i][j] = taken_piece;
                                 twoDimArray[last_i][last_j] = "";
                                 queue = 1;
                             }
-                            if (taken_piece.equals("n") && checkBlackKnight(i, j) && queue == 1){
+                            if (taken_piece.equals("n") && d.checkKnight(last_i, last_j, i, j, -1) && queue == 1){
                                 twoDimArray[i][j] = taken_piece;
                                 twoDimArray[last_i][last_j] = "";
                                 queue = 0;
@@ -345,14 +382,14 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                                 twoDimArray[last_i][last_j] = "";
                                 queue = 0;
                             }
-                            if (taken_piece.equals("K") && checkWhiteKing(i, j) && queue == 0){
+                            if (taken_piece.equals("K") && d.checkKing(last_i, last_j, i, j, 1) && queue == 0){
                                 twoDimArray[i][j] = taken_piece;
                                 twoDimArray[last_i][last_j] = "";
                                 rightToCastleShortWhite = false;
                                 rightToCastleLongWhite = false;
                                 queue = 1;
                             }
-                            if (taken_piece.equals("k") && checkBlackKing(i, j) && queue == 1){
+                            if (taken_piece.equals("k") && d.checkKing(last_i, last_j, i, j, -1) && queue == 1){
                                 twoDimArray[i][j] = taken_piece;
                                 twoDimArray[last_i][last_j] = "";
                                 rightToCastleShortBlack = false;
@@ -414,11 +451,10 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                                     && twoDimArray[0][6].equals("") && twoDimArray[0][7].equals("r")
                                     && twoDimArray[0][3].equals("k") && twoDimArray[0][4].equals("")
                                     && swi == 1){
-                                checkingTwoDimArray = twoDimArray;
-                                checkLegalMovesWhite();
                                 castleSwitchBlackLong();
                                 queue = 0;
                             }
+                            checkingTwoDimArray = twoDimArray;
                             System.out.println(illegalMovesW.toString());
                             last_j = 0;
                             last_i = 8;
@@ -542,10 +578,10 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         }
     }
 
-    public boolean checkWhiteKnight(int i, int j){
+ /*   public boolean checkWhiteKnight(int i, int j){
         int dx = abs(i - last_i);
         int dy = abs(j - last_j);
-        if(((dx == 1 && dy == 2) || (dx == 2 && dy == 1)) && whiteEats(i, j)){
+        if(((dx == 1 && dy == 2) || (dx == 2 && dy == 1)) && d.eats(i, j, 1)){
             if (twoDimArray[i][j].equals("p") ||
                     twoDimArray[i][j].equals("n") ||
                     twoDimArray[i][j].equals("b") ||
@@ -571,7 +607,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     public boolean checkBlackKnight(int i, int j){
         int dx = abs(i - last_i);
         int dy = abs(j - last_j);
-        if(((dx == 1 && dy == 2) || (dx == 2 && dy == 1)) && blackEats(i, j)){
+        if(((dx == 1 && dy == 2) || (dx == 2 && dy == 1)) && d.eats(i, j, -1)){
             if (twoDimArray[i][j].equals("P") ||
                     twoDimArray[i][j].equals("N") ||
                     twoDimArray[i][j].equals("B") ||
@@ -586,14 +622,19 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     pgn += "N" + getCoordinate(j, i) + " ";
                 }
             }
+            checkLegalMovesWhite();
+                if (blackKingUnderCheck){
+                    System.out.println("its obviosly on check");
+                    return true;
+                }
             return true;
         }else{
             return false;
         }
     }
-
+*/
     public boolean checkWhiteBishop(int i, int j){
-        if((abs(i - last_i) == abs(j - last_j)) && whiteEats(i, j)){
+        if((abs(i - last_i) == abs(j - last_j)) && d.eats(i, j, 1)){
             if(i > last_i){
                 if(j > last_j){
                     for (int k = 1; k < j-last_j; k++){
@@ -690,7 +731,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     }
 
     public boolean checkBlackBishop(int i, int j){
-        if((abs(i - last_i) == abs(j - last_j)) && blackEats(i, j)){
+        if((abs(i - last_i) == abs(j - last_j)) && d.eats(i, j, -1)){
             if(i > last_i){
                 if(j > last_j){
                     for (int k = 1; k < j-last_j; k++){
@@ -787,7 +828,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     }
 
     public boolean checkWhiteRook(int i, int j){
-        if(((i == last_i) || (j == last_j)) && whiteEats(i, j)){
+        if(((i == last_i) || (j == last_j)) && d.eats(i, j, 1)){
             if (i == last_i){
                 if (j > last_j){
                     for (int k = 1; k < j-last_j; k++){
@@ -890,7 +931,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     }
 
     public boolean checkBlackRook(int i, int j){
-        if(((i == last_i) || (j == last_j)) && blackEats(i, j)){
+        if(((i == last_i) || (j == last_j)) && d.eats(i, j, -1)){
             if (i == last_i){
                 if (j > last_j){
                     for (int k = 1; k < j-last_j; k++){
@@ -991,7 +1032,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     }
 
     public boolean checkWhiteQueen(int i, int j){
-        if(((abs(i - last_i) == abs(j - last_j)) || ((i == last_i) || (j == last_j))) && whiteEats(i, j)){
+        if(((abs(i - last_i) == abs(j - last_j)) || ((i == last_i) || (j == last_j))) && d.eats(i, j, 1)){
             if (i == last_i){
                 if (j > last_j){
                     for (int k = 1; k < j-last_j; k++){
@@ -1162,7 +1203,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     }
 
     public boolean checkBlackQueen(int i, int j){
-        if(((abs(i - last_i) == abs(j - last_j)) || ((i == last_i) || (j == last_j))) && blackEats(i, j)){
+        if(((abs(i - last_i) == abs(j - last_j)) || ((i == last_i) || (j == last_j))) && d.eats(i, j, -1)){
             if (i == last_i){
                 if (j > last_j){
                     for (int k = 1; k < j-last_j; k++){
@@ -1329,71 +1370,6 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
             return false;
         }
     }
-    public boolean checkWhiteKing(int i, int j){
-        if((abs(last_i - i) <= 1 && abs(last_j - j) <= 1) && whiteEats(i, j)){
-            if (twoDimArray[i][j].equals("p") ||
-                    twoDimArray[i][j].equals("n") ||
-                    twoDimArray[i][j].equals("b") ||
-                    twoDimArray[i][j].equals("r") ||
-                    twoDimArray[i][j].equals("q") ||
-                    twoDimArray[i][j].equals("k")){
-                if (!notNotate){
-                    pgn += count + ". K" + "x" + getCoordinate(j, i) + " ";
-                    count += 1;
-                }
-            }else{
-                if (!notNotate) {
-                    pgn += count + ". K" + getCoordinate(j, i) + " ";
-                    count += 1;
-                }
-            }
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public boolean checkBlackKing(int i, int j){
-        if((abs(last_i - i) <= 1 && abs(last_j - j) <= 1) && blackEats(i, j)){
-            if (twoDimArray[i][j].equals("p") ||
-                    twoDimArray[i][j].equals("n") ||
-                    twoDimArray[i][j].equals("b") ||
-                    twoDimArray[i][j].equals("r") ||
-                    twoDimArray[i][j].equals("q") ||
-                    twoDimArray[i][j].equals("k")){
-                if (!notNotate){
-                    pgn += count + "K" + "x" + getCoordinate(j, i) + " ";
-                    count += 1;
-                }
-            }else{
-                if (!notNotate) {
-                    pgn += count + "K" + getCoordinate(j, i) + " ";
-                    count += 1;
-                }
-            }
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public boolean whiteEats(int i, int j){
-        return (twoDimArray[i][j].length() == 0) || Character.isLowerCase(twoDimArray[i][j].charAt(0));
-    }
-
-    public boolean blackEats(int i, int j){
-        if((twoDimArray[i][j].equals("P") ||
-                        twoDimArray[i][j].equals("N") ||
-                        twoDimArray[i][j].equals("B") ||
-                        twoDimArray[i][j].equals("R") ||
-                        twoDimArray[i][j].equals("Q") ||
-                        twoDimArray[i][j].equals("K") ||
-                        twoDimArray[i][j].equals(""))){
-            return true;
-        }else{
-            return false;
-        }
-    }
 
     public void castleWhiteShort(){
         twoDimArray[7][6] = "K";
@@ -1452,36 +1428,17 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         twoDimArray[0][7] = "";
         rightToCastleLongBlack = false;
     }
+
+    public boolean pseudoLegalMoveRook(){
+        return true;
+    }
+
     public void enPassantWhite(){
 
     }
 
     public void II(){
 
-    }
-
-    public void checkLegalMovesWhite(){
-        notNotate = true;
-        illegalMovesW.clear();
-        blackKingUnderCheck = false;
-        for(int m = 0; m < 8; m++){
-            for (int n = 0; n < 8; n++) {
-                if (twoDimArray[m][n].equals("N")) {
-                    for (int k = 0; k < 8; k++) {
-                        for (int l = 0; l < 8; l++) {
-                            if (checkWhiteKnight(k, l)) {
-                                if (twoDimArray[k][l].equals("k")) {
-                                    blackKingUnderCheck = true;
-                                    System.out.println("Check");
-                                    illegalMovesW.add(k + ":" + l);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        notNotate = false;
     }
 
     @Override
@@ -1502,28 +1459,40 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
             int draw_width = width_dp/8;
             int draw_height = width_dp/8;
             int color_sq;
-            if(colors.equals("hibiscus")) {
-                color_sq = getResources().getColor(R.color.hibiscus);
-            }else if(colors.equals("thistle")) {
-                color_sq = getResources().getColor(R.color.thistle);
-            }else if(colors.equals("orchid")) {
-                color_sq = getResources().getColor(R.color.orchid);
-            }else if(colors.equals("african")) {
-                color_sq = getResources().getColor(R.color.african);
-            }else if(colors.equals("salmon")) {
-                color_sq = getResources().getColor(R.color.salmon);
-            }else if(colors.equals("raspberry")) {
-                color_sq = getResources().getColor(R.color.raspberry);
-            }else if(colors.equals("cornflower")) {
-                color_sq = getResources().getColor(R.color.cornflower);
-            }else if(colors.equals("turkish")) {
-                color_sq = getResources().getColor(R.color.flax);
-            }else if(colors.equals("lemon")) {
-                color_sq = getResources().getColor(R.color.lemon);
-            }else if(colors.equals("tea")) {
-                color_sq = getResources().getColor(R.color.tea);
-            }else {
-                color_sq = getResources().getColor(R.color.sea);
+            switch (colors) {
+                case "hibiscus":
+                    color_sq = getResources().getColor(R.color.hibiscus);
+                    break;
+                case "thistle":
+                    color_sq = getResources().getColor(R.color.thistle);
+                    break;
+                case "orchid":
+                    color_sq = getResources().getColor(R.color.orchid);
+                    break;
+                case "african":
+                    color_sq = getResources().getColor(R.color.african);
+                    break;
+                case "salmon":
+                    color_sq = getResources().getColor(R.color.salmon);
+                    break;
+                case "raspberry":
+                    color_sq = getResources().getColor(R.color.raspberry);
+                    break;
+                case "cornflower":
+                    color_sq = getResources().getColor(R.color.cornflower);
+                    break;
+                case "turkish":
+                    color_sq = getResources().getColor(R.color.flax);
+                    break;
+                case "lemon":
+                    color_sq = getResources().getColor(R.color.lemon);
+                    break;
+                case "tea":
+                    color_sq = getResources().getColor(R.color.tea);
+                    break;
+                default:
+                    color_sq = getResources().getColor(R.color.sea);
+                    break;
             }
             Bitmap K = Bitmap.createScaledBitmap(bit_k, draw_width, draw_height, false);
             Bitmap P = Bitmap.createScaledBitmap(bit_p, draw_width, draw_height, false);
@@ -1538,18 +1507,18 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
             Bitmap r = Bitmap.createScaledBitmap(bit_rb, draw_width, draw_height, false);
             Bitmap q = Bitmap.createScaledBitmap(bit_qb, draw_width, draw_height, false);
             if (switcher.equals("BLACK") && MainActivity.game.equals("normal")){
-                K = Bitmap.createScaledBitmap(bit_kb, draw_width, draw_width, false);
-                P = Bitmap.createScaledBitmap(bit_pb, draw_width, draw_width, false);
-                N = Bitmap.createScaledBitmap(bit_nb, draw_width, draw_width, false);
-                B = Bitmap.createScaledBitmap(bit_bb, draw_width, draw_width, false);
-                R = Bitmap.createScaledBitmap(bit_rb, draw_width, draw_width, false);
-                Q = Bitmap.createScaledBitmap(bit_qb, draw_width, draw_width, false);
-                k = Bitmap.createScaledBitmap(bit_k, draw_width, draw_width, false);
-                p = Bitmap.createScaledBitmap(bit_p, draw_width, draw_width, false);
-                n = Bitmap.createScaledBitmap(bit_n, draw_width, draw_width, false);
-                b = Bitmap.createScaledBitmap(bit_b, draw_width, draw_width, false);
-                r = Bitmap.createScaledBitmap(bit_r, draw_width, draw_width, false);
-                q = Bitmap.createScaledBitmap(bit_q, draw_width, draw_width, false);
+                K = Bitmap.createScaledBitmap(bit_kb, draw_width, draw_height, false);
+                P = Bitmap.createScaledBitmap(bit_pb, draw_width, draw_height, false);
+                N = Bitmap.createScaledBitmap(bit_nb, draw_width, draw_height, false);
+                B = Bitmap.createScaledBitmap(bit_bb, draw_width, draw_height, false);
+                R = Bitmap.createScaledBitmap(bit_rb, draw_width, draw_height, false);
+                Q = Bitmap.createScaledBitmap(bit_qb, draw_width, draw_height, false);
+                k = Bitmap.createScaledBitmap(bit_k, draw_width, draw_height, false);
+                p = Bitmap.createScaledBitmap(bit_p, draw_width, draw_height, false);
+                n = Bitmap.createScaledBitmap(bit_n, draw_width, draw_height, false);
+                b = Bitmap.createScaledBitmap(bit_b, draw_width, draw_height, false);
+                r = Bitmap.createScaledBitmap(bit_r, draw_width, draw_height, false);
+                q = Bitmap.createScaledBitmap(bit_q, draw_width, draw_height, false);
             }
 
             if (canvas!=null) {
@@ -1613,12 +1582,11 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                             }
                         }
                     }
+
                     while (last_x == x || last_y == y){
                         II();
                     }
                     movePiece();
-                    checkingTwoDimArray = twoDimArray;
-                    checkLegalMovesWhite();
                     if (colorfully.equals("sea") || colorfully.equals("turkish")){
                         paint_circles.setColor(Color.RED);
                     }else if (colorfully.equals("raspberry")){
@@ -1630,12 +1598,14 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     new_name = name + ": ";
                     String[] words = new_name.split(":");
                     FontPaint.setColor(ft);
-                    canvas.drawText(MainActivity.eco + " " + words[0], 20, draw_width/2, FontPaint);
+                    int bugFixing = draw_width / 2;
+                    canvas.drawText(MainActivity.eco + " " + words[0], 20, bugFixing, FontPaint);
                     FontPaint.setColor(Color.WHITE);
                     wm = ">>>" + words[1];
-                    canvas.drawText(wm, 20, draw_width / 2 +60, FontPaint);
+                    canvas.drawText(wm, 20, bugFixing + 60, FontPaint);
                     canvas.drawCircle(last_x, last_y, 10 , paint_circles);
                     FontPaint.setColor(Color.BLUE);
+                    canvas.drawText(pgn, 20, draw_width * 9 + bugFixing + 60, FontPaint);
                 }finally{
                     getHolder().unlockCanvasAndPost(canvas);
                 }
