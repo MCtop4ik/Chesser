@@ -44,8 +44,10 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     static int last_y = 0;
     static int last_i = 8;
     static int last_j = 0;
-    static int queue = 0;
+    int queue;
     static int swi = 0;
+    static int saved_i;
+    static int saved_j;
     static String taken_piece = "";
     boolean rightToCastleShortWhite = true;
     boolean rightToCastleShortBlack = true;
@@ -57,16 +59,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     static boolean blackKingUnderCheck = false;
     Desk d = new Desk();
 
-    public static String[][] twoDimArray = {
-            {"r", "n", "b", "q", "k", "b", "n", "r"},
-            {"p", "p", "p", "p", "p", "p", "p", "p"},
-            {"", "", "", "", "", "", "", ""},
-            {"", "", "", "", "", "", "", ""},
-            {"", "", "", "", "", "", "", ""},
-            {"", "", "", "", "", "", "", ""},
-            {"P", "P", "P", "P", "P", "P", "P", "P"},
-            {"R", "N", "B", "Q", "K", "B", "N", "R"},
-            {""}};
+    public static String[][] twoDimArray = {};
     public static String[][] checkingTwoDimArray = {
             {"r", "n", "b", "q", "k", "b", "n", "r"},
             {"p", "p", "p", "p", "p", "p", "p", "p"},
@@ -314,6 +307,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     public void movePiece() {
         int square_height = (height_dp) / 40 - 150;
         int draw_width = width_dp / 8;
+        queue = Desk.queue;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (x > draw_width * (j) && y > square_height + draw_width * (i + 3)
@@ -326,62 +320,10 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                         taken_piece = twoDimArray[i][j];
                     } else {
                         if (last_i != i || last_j != j){
-                            if (taken_piece.equals("P") && d.checkPawn(last_i, last_j, i, j, 1) && queue == 0){
-                                twoDimArray[i][j] = taken_piece;
-                                if (i == 0){
-                                    twoDimArray[i][j] = "Q";
-                                }
-                                twoDimArray[last_i][last_j] = "";
-                                queue = 1;
-                            }
-                            if (taken_piece.equals("p") && d.checkPawn(last_i, last_j, i, j, -1) && queue == 1){
-                                twoDimArray[i][j] = taken_piece;
-                                if (i == 7){
-                                    twoDimArray[i][j] = "q";
-                                }
-                                twoDimArray[last_i][last_j] = "";
-                                queue = 0;
-                            }
-                            if (taken_piece.equals("N") && d.checkKnight(last_i, last_j, i, j, 1) && queue == 0){
-                                twoDimArray[i][j] = taken_piece;
-                                twoDimArray[last_i][last_j] = "";
-                                queue = 1;
-                            }
-                            if (taken_piece.equals("n") && d.checkKnight(last_i, last_j, i, j, -1) && queue == 1){
-                                twoDimArray[i][j] = taken_piece;
-                                twoDimArray[last_i][last_j] = "";
-                                queue = 0;
-                            }
-                            if (taken_piece.equals("B") && d.checkBishop(last_i, last_j, i, j, 1) && queue == 0){
-                                twoDimArray[i][j] = taken_piece;
-                                twoDimArray[last_i][last_j] = "";
-                                queue = 1;
-                            }
-                            if (taken_piece.equals("b") && d.checkBishop(last_i, last_j, i, j, -1) && queue == 1){
-                                twoDimArray[i][j] = taken_piece;
-                                twoDimArray[last_i][last_j] = "";
-                                queue = 0;
-                            }
-                            if (taken_piece.equals("R") && d.checkRook(last_i, last_j, i, j, 1) && queue == 0){
-                                twoDimArray[i][j] = taken_piece;
-                                twoDimArray[last_i][last_j] = "";
-                                queue = 1;
-                            }
-                            if (taken_piece.equals("r") && d.checkRook(last_i, last_j, i, j, -1) && queue == 1){
-                                twoDimArray[i][j] = taken_piece;
-                                twoDimArray[last_i][last_j] = "";
-                                queue = 0;
-                            }
-                            if (taken_piece.equals("Q") && d.checkQueen(last_i, last_j, i, j, 1) && queue == 0){
-                                twoDimArray[i][j] = taken_piece;
-                                twoDimArray[last_i][last_j] = "";
-                                queue = 1;
-                            }
-                            if (taken_piece.equals("q") && d.checkQueen(last_i, last_j, i, j, -1) && queue == 1){
-                                twoDimArray[i][j] = taken_piece;
-                                twoDimArray[last_i][last_j] = "";
-                                queue = 0;
-                            }
+                            taken_piece = twoDimArray[i][j];
+                            saved_i = i;
+                            saved_j = j;
+                            d.makeMove();
                             if (taken_piece.equals("K") && d.checkKing(last_i, last_j, i, j, 1) && queue == 0){
                                 twoDimArray[i][j] = taken_piece;
                                 twoDimArray[last_i][last_j] = "";
@@ -795,6 +737,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     while (last_x == x || last_y == y){
                         II();
                     }
+                    twoDimArray = d.boardArray;
                     movePiece();
                     if (colorfully.equals("sea") || colorfully.equals("turkish")){
                         paint_circles.setColor(Color.RED);

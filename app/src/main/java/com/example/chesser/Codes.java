@@ -58,7 +58,7 @@ public class Codes extends AppCompatActivity {
                     startActivity(open);
                 }else if(promo.getText().toString().equals(">>>clearPGN")){
                     TestSurfaceView.pgn = "";
-                    TestSurfaceView.queue = 0;
+                    Desk.queue = 0;
                     TestSurfaceView.count = 1;
                 }
             }

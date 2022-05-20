@@ -2,8 +2,77 @@ package com.example.chesser;
 
 import static java.lang.Math.abs;
 
+import java.util.Arrays;
+import java.util.Locale;
+
 class Desk {
-    String[][] boardArray = TestSurfaceView.twoDimArray;
+    String[][] boardArray = {
+            {"r", "n", "b", "q", "k", "b", "n", "r"},
+            {"p", "p", "p", "p", "p", "p", "p", "p"},
+            {"", "", "", "", "", "", "", ""},
+            {"", "", "", "", "", "", "", ""},
+            {"", "", "", "", "", "", "", ""},
+            {"", "", "", "", "", "", "", ""},
+            {"P", "P", "P", "P", "P", "P", "P", "P"},
+            {"R", "N", "B", "Q", "K", "B", "N", "R"},
+            {""}};
+
+    public static int queue;
+    public void move(int i, int j, int last_j, int last_i, String taken_piece){
+        boardArray[i][j] = taken_piece;
+        boardArray[last_i][last_j] = "";
+    }
+
+    public void makeMove(){
+        int last_i = TestSurfaceView.last_i;
+        int i = TestSurfaceView.saved_i;
+        int last_j = TestSurfaceView.last_j;
+        int j = TestSurfaceView.saved_j;
+        System.out.println(last_i);
+        System.out.println(last_j);
+        System.out.println(i);
+        System.out.println(j);
+        System.out.println(queue);
+        String taken_piece = boardArray[last_i][last_j];
+        int color;
+        if (queue == 0)
+            color = -1;
+        else
+            color = 1;
+        if (taken_piece.toLowerCase(Locale.ROOT).equals("p")
+                && checkPawn(last_i, last_j, i, j, color)){
+            boardArray[i][j] = taken_piece;
+            if (i == 0 && color == 1){
+                boardArray[i][j] = "Q";
+            }else if(i == 7 && color == -1){
+                boardArray[i][j] = "q";
+            }
+            boardArray[last_i][last_j] = "";
+            queue -= color;
+        }
+
+        if (taken_piece.toLowerCase(Locale.ROOT).equals("n") && checkKnight(last_i, last_j, i, j, color)){
+            if (Character.isLowerCase(boardArray[i][j].charAt(0)) && queue == 1) {
+                move(i, j, last_i, last_j, taken_piece);
+                queue -= color;
+            }else if(Character.isUpperCase(boardArray[i][j].charAt(0)) && queue == 0){
+                move(i, j, last_i, last_j, taken_piece);
+                queue -= color;
+            }
+        }
+        if (taken_piece.toLowerCase(Locale.ROOT).equals("b") && checkBishop(last_i, last_j, i, j, color)){
+            move(i, j, last_i, last_j, taken_piece);
+            queue -= color;
+        }
+        if (taken_piece.toLowerCase(Locale.ROOT).equals("r") && checkRook(last_i, last_j, i, j, color)){
+            move(i, j, last_i, last_j,taken_piece);
+            queue -= color;
+        }
+        if (taken_piece.toLowerCase(Locale.ROOT).equals("q") && checkQueen(last_i, last_j, i, j, color)){
+            move(i, j, last_i, last_j, taken_piece);
+            queue -= color;
+        }
+    }
 
     public boolean eats(int i, int j, int color) {
         if (color > 0)
@@ -14,23 +83,6 @@ class Desk {
 
     public boolean eatsEverything(int i, int j) {
         return boardArray[i][j].length() != 0;
-    }
-
-    public void correctMoves(int color) {
-        if (color > 0) {
-            for (int m = 0; m < 8; m++)
-                for (int n = 0; n < 8; n++)
-                    for (int k = 0; k < 8; k++)
-                        for (int l = 0; l < 8; l++)
-                            if (boardArray[m][n].equals("N") && checkKnight(m, n, k, l, 1))
-                                System.out.println(m + " " + n + " -> " + k + " " + l);
-        } else
-            for (int m = 0; m < 8; m++)
-                for (int n = 0; n < 8; n++)
-                    for (int k = 0; k < 8; k++)
-                        for (int l = 0; l < 8; l++)
-                            if (boardArray[m][n].equals("n") && checkKnight(m, n, k, l, -1))
-                                System.out.println(m + " " + n + " -> " + k + " " + l);
     }
 
     public boolean checkKnight(int last_i, int last_j, int i, int j, int color) {
@@ -66,6 +118,9 @@ class Desk {
     }
 
     public boolean checkPawn(int last_i, int last_j, int i, int j, int color) {
+        for (String[] strings : boardArray) {
+            System.out.println(Arrays.toString(strings));
+        }
         if (last_i == i + (2 * color) && (last_i == 1 || last_i == 6 * color) && boardArray[i][last_j].equals("") && last_j == j) {
             return true;
         } else if (last_i == i + color && boardArray[i][last_j].equals("") && last_j == j) {
