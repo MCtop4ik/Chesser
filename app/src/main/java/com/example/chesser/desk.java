@@ -18,7 +18,7 @@ class Desk {
             {""}};
 
     public static int queue;
-    public void move(int i, int j, int last_j, int last_i, String taken_piece){
+    public void move(int i, int j, int last_i, int last_j, String taken_piece){
         boardArray[i][j] = taken_piece;
         boardArray[last_i][last_j] = "";
     }
@@ -28,11 +28,6 @@ class Desk {
         int i = TestSurfaceView.saved_i;
         int last_j = TestSurfaceView.last_j;
         int j = TestSurfaceView.saved_j;
-        System.out.println(last_i);
-        System.out.println(last_j);
-        System.out.println(i);
-        System.out.println(j);
-        System.out.println(queue);
         String taken_piece = boardArray[last_i][last_j];
         int color;
         if (queue == 0)
