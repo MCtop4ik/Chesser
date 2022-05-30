@@ -30,10 +30,6 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     String colors = MainActivity.colors;
     String switcher = MainActivity.switcher;
     String bg = MainActivity.backgrounds_font;
-    boolean notNotate = false;
-    static String pgn = "";
-    static int count = 1;
-    static ArrayList<String> illegalMovesW = new ArrayList<>();
     int x = -100;
     int y = -100;
     int width_dp = 0;
@@ -49,27 +45,12 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     static int saved_i;
     static int saved_j;
     static String taken_piece = "";
-    boolean rightToCastleShortWhite = true;
-    boolean rightToCastleShortBlack = true;
-    boolean rightToCastleLongWhite = true;
-    boolean rightToCastleLongBlack = true;
     static String name = "";
     static String new_name = " ";
     static String wm = "";
-    static boolean blackKingUnderCheck = false;
     Desk d = new Desk();
 
-    public static String[][] twoDimArray = {};
-    public static String[][] checkingTwoDimArray = {
-            {"r", "n", "b", "q", "k", "b", "n", "r"},
-            {"p", "p", "p", "p", "p", "p", "p", "p"},
-            {"", "", "", "", "", "", "", ""},
-            {"", "", "", "", "", "", "", ""},
-            {"", "", "", "", "", "", "", ""},
-            {"", "", "", "", "", "", "", ""},
-            {"P", "P", "P", "P", "P", "P", "P", "P"},
-            {"R", "N", "B", "Q", "K", "B", "N", "R"},
-            {""}};
+    public static String[][] twoDimArray = Desk.boardArray;
 
     private final Bitmap bit_k;
     private final Bitmap bit_p;
@@ -275,7 +256,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     {"P", "P", "P", "P", "P", "P", "P", "P"},
                     {"P", "P", "P", "P", "P", "P", "P", "P"},
                     {""}};
-        }else if(MainActivity.game.equals("normal") && pgn.equals("")){
+        }else if(MainActivity.game.equals("normal") && NotationHelper.pgn.equals("")){
             twoDimArray = new String[][]{
                     {"r", "n", "b", "q", "k", "b", "n", "r"},
                     {"p", "p", "p", "p", "p", "p", "p", "p"},
@@ -304,10 +285,12 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         y = (int)event.getY();
         return false;
     }
+
+
     public void movePiece() {
         int square_height = (height_dp) / 40 - 150;
         int draw_width = width_dp / 8;
-        queue = Desk.queue;
+        queue = Desk.color;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (x > draw_width * (j) && y > square_height + draw_width * (i + 3)
@@ -323,81 +306,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                             taken_piece = twoDimArray[i][j];
                             saved_i = i;
                             saved_j = j;
-                            d.makeMove();
-                            if (taken_piece.equals("K") && d.checkKing(last_i, last_j, i, j, 1) && queue == 0){
-                                twoDimArray[i][j] = taken_piece;
-                                twoDimArray[last_i][last_j] = "";
-                                rightToCastleShortWhite = false;
-                                rightToCastleLongWhite = false;
-                                queue = 1;
-                            }
-                            if (taken_piece.equals("k") && d.checkKing(last_i, last_j, i, j, -1) && queue == 1){
-                                twoDimArray[i][j] = taken_piece;
-                                twoDimArray[last_i][last_j] = "";
-                                rightToCastleShortBlack = false;
-                                rightToCastleLongBlack = false;
-                                queue = 0;
-                            }
-                            if (taken_piece.equals("K") && last_i == 7 && queue == 0
-                                    && last_j == 4 && i == 7 && j == 6 && twoDimArray[7][5].equals("")
-                            && twoDimArray[7][6].equals("") && twoDimArray[7][7].equals("R")
-                                    && rightToCastleShortWhite){
-                                castleWhiteShort();
-                                queue = 1;
-                            }
-                            if (taken_piece.equals("K") && last_i == 7 && queue == 0
-                                    && last_j == 4 && i == 7 && j == 2 && twoDimArray[7][3].equals("")
-                                    && twoDimArray[7][2].equals("") && twoDimArray[7][0].equals("R")
-                                    && rightToCastleLongWhite && twoDimArray[7][1].equals("")){
-                                castleWhiteLong();
-                                queue = 1;
-                            }
-                            if (taken_piece.equals("k") && last_i == 0 && queue == 1
-                                    && last_j == 4 && i == 0 && j == 6 && twoDimArray[0][5].equals("")
-                                    && twoDimArray[0][6].equals("") && twoDimArray[0][7].equals("r")
-                                    && rightToCastleShortBlack){
-                                castleBlackShort();
-                                queue = 0;
-                            }
-                            if (taken_piece.equals("k") && last_i == 0 && queue == 1
-                                    && last_j == 4 && i == 0 && j == 2 && twoDimArray[0][3].equals("")
-                                    && twoDimArray[0][2].equals("") && twoDimArray[0][0].equals("r")
-                                    && rightToCastleLongBlack && twoDimArray[0][1].equals("")){
-                                castleBlackLong();
-                                queue = 0;
-                            }
-                            if (taken_piece.equals("K") && last_i == 7 && queue == 0
-                                    && last_j == 3 && i == 7 && j == 1 && twoDimArray[7][2].equals("")
-                                    && twoDimArray[7][1].equals("") && twoDimArray[7][0].equals("R")
-                                    && twoDimArray[7][3].equals("K")
-                                    && rightToCastleShortWhite  && swi == 1){
-                                castleSwitchWhiteShort();
-                                queue = 1;}
-                            if (taken_piece.equals("K") && last_i == 7 && queue == 0
-                                    && last_j == 3 && i == 7 && j == 5 && twoDimArray[7][5].equals("")
-                                    && twoDimArray[7][6].equals("") && twoDimArray[7][7].equals("R")
-                                    && twoDimArray[7][3].equals("K") && twoDimArray[7][4].equals("")
-                                    && rightToCastleShortWhite && swi == 1){
-                                castleSwitchWhiteLong();
-                                queue = 1;}
-                            if (taken_piece.equals("k") && last_i == 0 && queue == 1
-                                    && last_j == 3 && i == 0 && j == 1 && twoDimArray[0][2].equals("")
-                                    && twoDimArray[0][1].equals("") && twoDimArray[0][0].equals("r")
-                                    && twoDimArray[0][3].equals("k")
-                                    && rightToCastleShortBlack && swi == 1){
-                                castleSwitchBlackShort();
-                                queue = 0;
-                            }
-                            if (taken_piece.equals("k") && last_i == 0 && queue == 1
-                                    && last_j == 3 && i == 0 && j == 5 && twoDimArray[0][5].equals("")
-                                    && twoDimArray[0][6].equals("") && twoDimArray[0][7].equals("r")
-                                    && twoDimArray[0][3].equals("k") && twoDimArray[0][4].equals("")
-                                    && swi == 1){
-                                castleSwitchBlackLong();
-                                queue = 0;
-                            }
-                            checkingTwoDimArray = twoDimArray;
-                            System.out.println(illegalMovesW.toString());
+                            d.makeMove(last_i, last_j, i, j);
                             last_j = 0;
                             last_i = 8;
                             last_x = 0;
@@ -409,183 +318,6 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                 }
             }
         }
-    }
-
-    public String getCoordinate(int a, int j){
-        int g = 8 - j;
-        switch (a) {
-            case(0):
-                return "a" + g;
-            case(1):
-                return "b" + g;
-            case(2):
-                return "c" + g;
-            case(3):
-                return "d" + g;
-            case(4):
-                return "e" + g;
-            case(5):
-                return "f" + g;
-            case(6):
-                return "g" + g;
-            case(7):
-                return "h" + g;
-
-            default:
-                return "";
-        }
-
-    }
-    public String getLetter(int a){
-        System.out.println(a);
-        switch (a) {
-            case(0):
-                return "a";
-            case(1):
-                return "b";
-            case(2):
-                return "c";
-            case(3):
-                return "d";
-            case(4):
-                return "e";
-            case(5):
-                return "f";
-            case(6):
-                return "g";
-            case(7):
-                return "h";
-            default:
-                return "";
-        }
-
-    }
-
-    /*public boolean checkWhitePawn(int i, int j){
-        if (last_i == i+2 && last_i == 6 && twoDimArray[i][last_j].equals("") && last_j == j){
-            if (!notNotate) {
-                pgn += count + ". " + getCoordinate(j, i) + " ";
-                count += 1;
-            }
-            return true;
-        }else if (last_i == i+1 && twoDimArray[i][last_j].equals("") && last_j==j){
-            if (!notNotate) {
-                pgn += count + ". " + getCoordinate(j, i) + " ";
-                count += 1;
-            }
-            return true;
-        }else if (last_i == i+1 && (j == last_j+1 || j == last_j-1)
-                && (twoDimArray[i][j].equals("p") ||
-                twoDimArray[i][j].equals("n") ||
-                twoDimArray[i][j].equals("b") ||
-                twoDimArray[i][j].equals("r") ||
-                twoDimArray[i][j].equals("q") ||
-                twoDimArray[i][j].equals("k"))){
-                if (!notNotate) {
-                    pgn += count + ". " + getLetter(last_j) + "x" + getCoordinate(j, i) + " ";
-                    count += 1;
-                }
-            return true;
-        }
-        else{
-                return false;
-            }
-        }
-
-    public boolean checkBlackPawn(int i, int j){
-        if (last_i == i-2 && last_i == 1 && twoDimArray[i][last_j].equals("") && last_j == j){
-            if (!notNotate) {
-                pgn += getCoordinate(j, i) + " ";
-            }
-            return true;
-        }else if (last_i == i-1 && twoDimArray[i][last_j].equals("") && last_j==j){
-            if (!notNotate) {
-                pgn += getCoordinate(j, i) + " ";
-            }
-            return true;
-        }else if (last_i == i-1 && (j == last_j+1 || j == last_j-1)
-                && (twoDimArray[i][j].equals("P") ||
-                twoDimArray[i][j].equals("N") ||
-                twoDimArray[i][j].equals("B") ||
-                twoDimArray[i][j].equals("R") ||
-                twoDimArray[i][j].equals("Q") ||
-                twoDimArray[i][j].equals("K"))){
-            if (!notNotate) {
-                pgn += getLetter(last_j) + "x" + getCoordinate(j, i) + " ";
-            }
-            return true;
-        }
-        else{
-            return false;
-        }
-    }*/
-
-    //https://zen.yandex.ru/media/id/5e7f52e668b51338284319d5/7-redkih-istoricheskih-fotografii-kotorye-stoit-uvidet-kajdomu-6274e28895652d0e4b782458?&
-
-    public void castleWhiteShort(){
-        twoDimArray[7][6] = "K";
-        twoDimArray[7][4] = "";
-        twoDimArray[7][5] = "R";
-        twoDimArray[7][7] = "";
-        rightToCastleShortWhite = false;
-    }
-    public void castleWhiteLong(){
-        twoDimArray[7][2] = "K";
-        twoDimArray[7][4] = "";
-        twoDimArray[7][3] = "R";
-        twoDimArray[7][0] = "";
-        rightToCastleLongWhite = false;
-    }
-    public void castleBlackShort(){
-        twoDimArray[0][6] = "k";
-        twoDimArray[0][4] = "";
-        twoDimArray[0][5] = "r";
-        twoDimArray[0][7] = "";
-        rightToCastleShortBlack = false;
-    }
-    public void castleBlackLong(){
-        twoDimArray[0][2] = "k";
-        twoDimArray[0][4] = "";
-        twoDimArray[0][3] = "r";
-        twoDimArray[0][0] = "";
-        rightToCastleLongBlack = false;
-    }
-
-    public void castleSwitchWhiteShort(){
-        twoDimArray[7][1] = "K";
-        twoDimArray[7][0] = "";
-        twoDimArray[7][2] = "R";
-        twoDimArray[7][3] = "";
-        rightToCastleShortWhite = false;
-    }
-    public void castleSwitchWhiteLong(){
-        twoDimArray[7][5] = "K";
-        twoDimArray[7][3] = "";
-        twoDimArray[7][4] = "R";
-        twoDimArray[7][7] = "";
-        rightToCastleLongWhite = false;
-    }
-    public void castleSwitchBlackShort(){
-        twoDimArray[0][1] = "k";
-        twoDimArray[0][0] = "";
-        twoDimArray[0][2] = "r";
-        twoDimArray[0][3] = "";
-        rightToCastleShortBlack = false;
-    }
-    public void castleSwitchBlackLong(){
-        twoDimArray[0][5] = "k";
-        twoDimArray[0][3] = "";
-        twoDimArray[0][4] = "r";
-        twoDimArray[0][7] = "";
-        rightToCastleLongBlack = false;
-    }
-
-    public boolean pseudoLegalMoveRook(){
-        return true;
-    }
-
-    public void enPassantWhite(){
-
     }
 
     public void II(){
@@ -733,12 +465,11 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                             }
                         }
                     }
-
                     while (last_x == x || last_y == y){
                         II();
                     }
-                    twoDimArray = d.boardArray;
                     movePiece();
+                    d.convertFen("2r2r1k/p1p2p1p/1pNq1p2/3b4/3P3Q/8/PP3PPP/3RR1K1");
                     if (colorfully.equals("sea") || colorfully.equals("turkish")){
                         paint_circles.setColor(Color.RED);
                     }else if (colorfully.equals("raspberry")){
@@ -757,7 +488,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     canvas.drawText(wm, 20, bugFixing + 60, FontPaint);
                     canvas.drawCircle(last_x, last_y, 10 , paint_circles);
                     FontPaint.setColor(Color.BLUE);
-                    canvas.drawText(pgn, 20, draw_width * 9 + bugFixing + 60, FontPaint);
+                    canvas.drawText(NotationHelper.pgn, 20, draw_width * 9 + bugFixing + 60, FontPaint);
                 }finally{
                     getHolder().unlockCanvasAndPost(canvas);
                 }

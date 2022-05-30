@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
 
     private void testOpening(){
-        pgn = TestSurfaceView.pgn;
+        pgn = NotationHelper.pgn;
         for (int k = 1; k < 3404 ; k++){
             String req = "SELECT * FROM a where `id` = " + k;
             Cursor cursor = mDb.rawQuery(req,null);
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     public void run() {
         while(true){
             testOpening();
-            System.out.println(TestSurfaceView.pgn);
+            System.out.println(NotationHelper.pgn);
         }
     }
     private void initDB() {

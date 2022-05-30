@@ -57,9 +57,9 @@ public class Codes extends AppCompatActivity {
                     open = new Intent(Codes.this, Openings.class);
                     startActivity(open);
                 }else if(promo.getText().toString().equals(">>>clearPGN")){
-                    TestSurfaceView.pgn = "";
-                    Desk.queue = 0;
-                    TestSurfaceView.count = 1;
+                    NotationHelper.pgn = "";
+                    Desk.color = 1;
+                    NotationHelper.numberOfMove = 1;
                 }
             }
         });
