@@ -5,15 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 public class Codes extends AppCompatActivity {
     SharedPreferences mSettings;
     Intent open;
+    private SQLiteDatabase myDb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mSettings = getSharedPreferences(MyConstants.APP_PREFERENCES, Context.MODE_PRIVATE);
@@ -21,6 +26,7 @@ public class Codes extends AppCompatActivity {
         Button submit;
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
+        initDB();
         setContentView(R.layout.activity_codes);
         submit = findViewById(R.id.send);
         promo = findViewById(R.id.promocodeInput);
@@ -60,10 +66,35 @@ public class Codes extends AppCompatActivity {
                     NotationHelper.pgn = "";
                     Desk.color = 1;
                     NotationHelper.numberOfMove = 1;
+                }else if(promo.getText().toString().equals(">>>add")){
+                    savePosition();
                 }
             }
         });
 
+    }
+    public void savePosition(){
+        Cursor cursor = myDb.rawQuery("INSERT INTO games (name, fen) " +
+                "VALUES ('Russian Defence', 'rnb1kb1r/ppp1qppp/3p4/8/4n3/5N2/PPPPQPPP/RNB1KB1R')",null);
+        cursor.close();
+        Cursor cursor1 = myDb.rawQuery("SELECT * FROM games where `id` = '2'",null);
+        cursor1.moveToFirst();
+        String user = cursor1.getString(1);
+        String pass = cursor1.getString(2);
+        cursor1.close();
+        Toast toast = Toast.makeText(getApplicationContext(), user + ":" + pass, Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    private void initDB() {
+        //Переменная для работы с БД
+        DatabaseHelper mDBHelper = new DatabaseHelper(this);
+        try {
+            mDBHelper.updateDataBase();
+        } catch (IOException mIOException) {
+            throw new Error("UnableToUpdateDatabase");
+        }
+        myDb = mDBHelper.getWritableDatabase();
     }
 
 

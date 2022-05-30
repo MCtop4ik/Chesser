@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -246,7 +247,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     public void surfaceCreated(SurfaceHolder holder) {
         new Thread(this).start();
         if(MainActivity.game.equals("horde")){
-            twoDimArray = new String[][]{
+            Desk.boardArray = new String[][]{
                     {"r", "n", "b", "q", "k", "b", "n", "r"},
                     {"p", "p", "p", "p", "p", "p", "p", "p"},
                     {"", "", "", "", "", "", "", ""},
@@ -257,7 +258,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     {"P", "P", "P", "P", "P", "P", "P", "P"},
                     {""}};
         }else if(MainActivity.game.equals("normal") && NotationHelper.pgn.equals("")){
-            twoDimArray = new String[][]{
+            Desk.boardArray = new String[][]{
                     {"r", "n", "b", "q", "k", "b", "n", "r"},
                     {"p", "p", "p", "p", "p", "p", "p", "p"},
                     {"", "", "", "", "", "", "", ""},
@@ -270,7 +271,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
             if (switcher.equals("BLACK")) {
                 queue = 1;
                 swi = 1;
-                twoDimArray = new String[][]{{"r", "n", "b", "k", "q", "b", "n", "r"}, {"p", "p", "p", "p", "p", "p", "p", "p"}, {"", "", "", "", "", "", "", ""}, {"", "", "", "", "", "", "", ""}, {"", "", "", "", "", "", "", ""}, {"", "", "", "", "", "", "", ""}, {"P", "P", "P", "P", "P", "P", "P", "P"}, {"R", "N", "B", "K", "Q", "B", "N", "R"}, {""}};
+                Desk.boardArray = new String[][]{{"r", "n", "b", "k", "q", "b", "n", "r"}, {"p", "p", "p", "p", "p", "p", "p", "p"}, {"", "", "", "", "", "", "", ""}, {"", "", "", "", "", "", "", ""}, {"", "", "", "", "", "", "", ""}, {"", "", "", "", "", "", "", ""}, {"P", "P", "P", "P", "P", "P", "P", "P"}, {"R", "N", "B", "K", "Q", "B", "N", "R"}, {""}};
             }
         }
         }
@@ -300,10 +301,8 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                         last_x = x;
                         last_i = i;
                         last_j = j;
-                        taken_piece = twoDimArray[i][j];
                     } else {
                         if (last_i != i || last_j != j){
-                            taken_piece = twoDimArray[i][j];
                             saved_i = i;
                             saved_j = j;
                             d.makeMove(last_i, last_j, i, j);
@@ -424,7 +423,7 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                                 test += 1;
                             }
                             canvas.drawRect(draw_width * (j), square_height + draw_width * i, draw_width * (j + 1), square_height + draw_width * (i + 1), paint_square);
-                            switch (twoDimArray[i - 3][j]) {
+                            switch (Desk.boardArray[i - 3][j]) {
                                 case "K":
                                     canvas.drawBitmap(K, draw_width * (j), (square_height + draw_width * i), paint);
                                     break;
@@ -469,7 +468,6 @@ public class TestSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                         II();
                     }
                     movePiece();
-                    d.convertFen("2r2r1k/p1p2p1p/1pNq1p2/3b4/3P3Q/8/PP3PPP/3RR1K1");
                     if (colorfully.equals("sea") || colorfully.equals("turkish")){
                         paint_circles.setColor(Color.RED);
                     }else if (colorfully.equals("raspberry")){

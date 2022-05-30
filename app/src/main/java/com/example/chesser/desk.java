@@ -3,7 +3,6 @@ package com.example.chesser;
 import static java.lang.Math.abs;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 
 class Desk {
@@ -30,7 +29,7 @@ class Desk {
     public static int color = 1;
 
 
-    public String[][] convertFen(String fen){
+    public void convertFen(String fen){
         fen = fen.replace("1", " ");
         fen = fen.replace("2", "  ");
         fen = fen.replace("3", "   ");
@@ -49,9 +48,11 @@ class Desk {
             }else{
                 countToEight += 1;
             }
-            boardArray[j][countToEight] = String.valueOf(fen.charAt(i));
+            if (!String.valueOf(fen.charAt(i)).equals(" ")){
+                boardArray[j][countToEight] = String.valueOf(fen.charAt(i));}else{
+                boardArray[j][countToEight] = "";
+            }
         }
-        return boardArray;
     }
 
     public void printBoard() {
@@ -386,9 +387,12 @@ class Desk {
         if (boardArray[l][k].toLowerCase().equals("k")){
             if (color == 1){
                 System.out.println("check from white");
-                whiteUnderCheck = true;}
+                whiteUnderCheck = true;
+                NotationHelper.pgn += "+";
+            }
             else{
                 System.out.println("check from black");
+                NotationHelper.pgn += "+";
                 blackUnderCheck = true;}
         }
     }

@@ -93,6 +93,12 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         }
     }
 
+    public String removeLastChar(String s) {
+        return (s == null || s.length() == 0)
+                ? null
+                : (s.substring(0, s.length() - 1));
+    }
+
     @Override
     public void run() {
         while(true){
