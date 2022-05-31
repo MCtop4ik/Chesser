@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -68,24 +69,45 @@ public class Codes extends AppCompatActivity {
                     NotationHelper.numberOfMove = 1;
                 }else if(promo.getText().toString().equals(">>>add")){
                     savePosition();
+                    //logAllGames();
                 }
             }
         });
 
     }
     public void savePosition(){
-        Cursor cursor = myDb.rawQuery("INSERT INTO games (name, fen) " +
-                "VALUES ('Russian Defence', 'rnb1kb1r/ppp1qppp/3p4/8/4n3/5N2/PPPPQPPP/RNB1KB1R')",null);
-        cursor.close();
-        Cursor cursor1 = myDb.rawQuery("SELECT * FROM games where `id` = '2'",null);
+        String fen = "rnb1kb1r/ppp1qppp/3p4/8/4n3/5N2/PPPPQPPP/RNB1KB1R";
+        myDb.execSQL("INSERT INTO games (name, fen) " +
+                "VALUES ('Italian Game', '" + fen + "')");
+        logAllGames();
+//        Cursor cursor1 = myDb.rawQuery("SELECT * FROM games where `id` = '2'",null);
+//        cursor1.moveToFirst();
+//        String user = cursor1.getString(1);
+//        String pass = cursor1.getString(2);
+//        cursor1.close();
+//        Toast toast = Toast.makeText(getApplicationContext(), user + ":" + pass, Toast.LENGTH_LONG);
+//        toast.show();
+    }
+    public void logAllGames(){
+        Cursor cursor1 = myDb.rawQuery("SELECT * FROM games",null);
         cursor1.moveToFirst();
-        String user = cursor1.getString(1);
-        String pass = cursor1.getString(2);
-        cursor1.close();
-        Toast toast = Toast.makeText(getApplicationContext(), user + ":" + pass, Toast.LENGTH_LONG);
-        toast.show();
+        String opening = cursor1.getString(1);
+        String FEN = cursor1.getString(2);
+        Log.d("games", opening);
+        Log.d("games", FEN);
+        while (cursor1.moveToNext())
+        {
+            opening = cursor1.getString(1);
+            FEN = cursor1.getString(2);
+            Log.d("games", opening);
+            Log.d("games", FEN);
+        }
     }
 
+    /*Другой способ объединения строк представляет метод concat():
+    String str1 = "Java";
+    String str2 = "Hello";
+    str2 = str2.concat(str1); // HelloJava*/
     private void initDB() {
         //Переменная для работы с БД
         DatabaseHelper mDBHelper = new DatabaseHelper(this);
