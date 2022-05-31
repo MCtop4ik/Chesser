@@ -81,10 +81,10 @@ public class MainActivity extends AppCompatActivity implements Runnable{
             String req = "SELECT * FROM a where `id` = " + k;
             Cursor cursor = mDb.rawQuery(req,null);
             cursor.moveToFirst();
-            pass = cursor.getString(3);
+            if(cursor.moveToFirst()){
+                pass = cursor.getString(3);}
             String new_pass = pass + " ";
             if (pgn.equals(new_pass)){
-                System.out.println("here it is");
                 eco = cursor.getString(1);
                 name = cursor.getString(2);
             }

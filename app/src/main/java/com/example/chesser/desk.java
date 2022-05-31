@@ -55,6 +55,30 @@ class Desk {
         }
     }
 
+    public String makeFEN(String[][] arr){
+        String fen = "";
+        int count = 0;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                if (arr[i][j].equals("")){
+                    count += 1;
+                    if (count == 9){
+                        fen = fen.concat(String.valueOf(count-1));
+                        count = 1;
+                    }
+                }else{
+                    if (count != 0){
+                        fen = fen.concat(String.valueOf(count));
+                    }
+                    fen = fen.concat(arr[i][j]);
+                    count = 0;
+                }
+
+            }
+        }
+        return fen;
+    }
+
     public void printBoard() {
         for (String[] line : boardArray) {
             for (String i : line)

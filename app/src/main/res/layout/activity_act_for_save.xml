@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".actForSave">
+
+    <Button
+        android:id="@+id/saveLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Save Position"
+        android:textSize="32sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <EditText
+        android:id="@+id/nameOfSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="Type your name of position"
+        android:inputType="textPersonName"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/saveLabel"
+        tools:layout_editor_absoluteX="73dp" />
+
+    <Button
+        android:id="@+id/go"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Go To Saved Positions"
+        app:layout_constraintTop_toBottomOf="@+id/nameOfSave"
+        tools:layout_editor_absoluteX="134dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

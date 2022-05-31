@@ -47,7 +47,7 @@
         android:layout_width="220dp"
         android:layout_height="60dp"
         android:layout_marginTop="4dp"
-        android:text="credits"
+        android:text="Save position"
         android:textAlignment="center"
         android:textColor="#CDDC39"
         android:textSize="24sp"
