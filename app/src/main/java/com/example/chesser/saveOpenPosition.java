@@ -1,22 +1,31 @@
 package com.example.chesser;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ListActivity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.io.IOException;
 
 public class saveOpenPosition extends ListActivity {
-    String[] myArr = { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август",
-            "Сентябрь", "Октябрь", "Ноябрь", "Декабрь", "jytf", "rtyuytre", "htdg",
-    "ggfdd", "hgfd", "hgfjkdlfkg", "hgjfkdl;flgkhj", "hgfjkdl", "fndmmcv", "gnfmcxkgj", "hgfjkdl"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ArrayAdapter<String> monthAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myArr);
+        ArrayAdapter<String> gameAdapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+                        Codes.gameList.toArray(new String[0]));
+        setListAdapter(gameAdapter);
+    }
 
-        setListAdapter(monthAdapter);
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        String game = (String) getListAdapter().getItem(position);
+        Toast.makeText(this, game, Toast.LENGTH_SHORT).show();
     }
 }

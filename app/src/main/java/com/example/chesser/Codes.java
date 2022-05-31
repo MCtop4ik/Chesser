@@ -15,11 +15,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Codes extends AppCompatActivity {
     SharedPreferences mSettings;
     Intent open;
     private SQLiteDatabase myDb;
+    public static ArrayList<String> gameList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mSettings = getSharedPreferences(MyConstants.APP_PREFERENCES, Context.MODE_PRIVATE);
@@ -31,7 +33,6 @@ public class Codes extends AppCompatActivity {
         setContentView(R.layout.activity_codes);
         submit = findViewById(R.id.send);
         promo = findViewById(R.id.promocodeInput);
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +71,9 @@ public class Codes extends AppCompatActivity {
                 }else if(promo.getText().toString().equals(">>>add")){
                     savePosition();
                     //logAllGames();
-                }
+                }else if(promo.getText().toString().equals(">>>fill")){
+                    fillAllGames();
+            }
             }
         });
 
@@ -80,14 +83,20 @@ public class Codes extends AppCompatActivity {
         myDb.execSQL("INSERT INTO games (name, fen) " +
                 "VALUES ('Italian Game', '" + fen + "')");
         logAllGames();
-//        Cursor cursor1 = myDb.rawQuery("SELECT * FROM games where `id` = '2'",null);
-//        cursor1.moveToFirst();
-//        String user = cursor1.getString(1);
-//        String pass = cursor1.getString(2);
-//        cursor1.close();
-//        Toast toast = Toast.makeText(getApplicationContext(), user + ":" + pass, Toast.LENGTH_LONG);
-//        toast.show();
     }
+
+    public void fillAllGames(){
+        Cursor cursor1 = myDb.rawQuery("SELECT * FROM games",null);
+        cursor1.moveToFirst();
+        String nameGame = cursor1.getString(1);
+        gameList.add(nameGame);
+        while (cursor1.moveToNext())
+        {
+            nameGame = cursor1.getString(1);
+            gameList.add(nameGame);
+        }
+    }
+
     public void logAllGames(){
         Cursor cursor1 = myDb.rawQuery("SELECT * FROM games",null);
         cursor1.moveToFirst();
@@ -118,6 +127,4 @@ public class Codes extends AppCompatActivity {
         }
         myDb = mDBHelper.getWritableDatabase();
     }
-
-
 }
