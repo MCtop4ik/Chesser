@@ -49,7 +49,7 @@ public class Main extends AppCompatActivity {
         credits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                credit = new Intent(Main.this, actForSave.class);
+                credit = new Intent(Main.this, saveOpenPosition.class);
                 startActivity(credit);
             }
         });

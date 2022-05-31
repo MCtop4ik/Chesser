@@ -10,12 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Chesser">
         <activity
-            android:name=".actForSave"
-            android:exported="true" />
-        <activity
-            android:name=".saveOpenPosition"
-            android:exported="true" />
-        <activity
             android:name=".info"
             android:exported="true" />
         <activity
