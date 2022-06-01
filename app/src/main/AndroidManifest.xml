@@ -13,6 +13,12 @@
             android:name=".info"
             android:exported="true" />
         <activity
+            android:name=".saveOpenPosition"
+            android:exported="true" />
+        <activity
+            android:name=".actForSave"
+            android:exported="true" />
+        <activity
             android:name=".VariantsOfChess"
             android:exported="true" />
         <activity
