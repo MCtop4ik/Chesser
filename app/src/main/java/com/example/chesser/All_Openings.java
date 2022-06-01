@@ -9,12 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class saveOpenPosition extends ListActivity {
+public class All_Openings extends ListActivity {
 
     private SQLiteDatabase myDb;
     public ArrayList<String> fenList = new ArrayList<>();
@@ -26,14 +25,12 @@ public class saveOpenPosition extends ListActivity {
         super.onCreate(savedInstanceState);
         initDB();
         fenList.clear();
-        Codes.gameList.clear();
         pgnList.clear();
         openingList.clear();
-        if (!actForSave.labelGame.equals(""))savePosition();
-        fillAllGames();
+        fillAllOpenings();
         ArrayAdapter<String> gameAdapter =
                 new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                        Codes.gameList.toArray(new String[0]));
+                        openingList.toArray(new String[0]));
         setListAdapter(gameAdapter);
     }
 
@@ -45,40 +42,22 @@ public class saveOpenPosition extends ListActivity {
         MainActivity.name = openingList.get(position);
         NotationHelper.pgn = pgnList.get(position);
         Intent open;
-        open = new Intent(saveOpenPosition.this, MainActivity.class);
+        open = new Intent(All_Openings.this, MainActivity.class);
         startActivity(open);
     }
 
-    public void fillAllGames(){
-        Cursor cursor1 = myDb.rawQuery("SELECT * FROM games",null);
-        cursor1.moveToFirst();
-        String nameGame = cursor1.getString(1);
-        String fen = cursor1.getString(2);
-        String pgnGame = cursor1.getString(3);
-        String opening = cursor1.getString(4);
-        fenList.add(fen);
-        pgnList.add(pgnGame);
-        openingList.add(opening);
-        Codes.gameList.add(nameGame);
-        while (cursor1.moveToNext()){
-            nameGame = cursor1.getString(1);
-            fen = cursor1.getString(2);
-            pgnGame = cursor1.getString(3);
-            opening = cursor1.getString(4);
-            fenList.add(fen);
-            pgnList.add(pgnGame);
-            openingList.add(opening);
-            Codes.gameList.add(nameGame);
+    public void fillAllOpenings(){
+        Cursor cursor = myDb.rawQuery("SELECT * FROM a",null);
+        cursor.moveToFirst();
+        fenList.add(cursor.getString(4));
+        pgnList.add(cursor.getString(3));
+        openingList.add(cursor.getString(1) + cursor.getString(2));
+        while (cursor.moveToNext()){
+           fenList.add(cursor.getString(4));
+           pgnList.add(cursor.getString(3));
+           openingList.add(cursor.getString(1) + " " + cursor.getString(2));
         }
-        cursor1.close();
-    }
-
-    public void savePosition(){
-        Desk d = new Desk();
-        String fen = d.makeFEN(Desk.boardArray);
-        myDb.execSQL("INSERT INTO games (name, fen, pgn, opening) " +
-                "VALUES ('" + actForSave.labelGame + "','" + fen + "','" + NotationHelper.pgn +
-                "','" + MainActivity.name + "')");
+        cursor.close();
     }
 
     private void initDB() {

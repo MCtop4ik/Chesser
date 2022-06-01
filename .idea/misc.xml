@@ -4,7 +4,6 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Senya/AndroidStudioProjects/Chesser/app/src/main/res/drawable/button_bg.xml" value="0.26296296296296295" />
-        <entry key="..\:/Users/Senya/AndroidStudioProjects/Chesser/app/src/main/res/layout/activity_act_for_save.xml" value="0.14739583333333334" />
         <entry key="..\:/Users/Senya/AndroidStudioProjects/Chesser/app/src/main/res/layout/activity_backgrounds.xml" value="0.33" />
         <entry key="..\:/Users/Senya/AndroidStudioProjects/Chesser/app/src/main/res/layout/activity_codes.xml" value="0.1" />
         <entry key="..\:/Users/Senya/AndroidStudioProjects/Chesser/app/src/main/res/layout/activity_credits.xml" value="0.25" />
@@ -21,6 +20,8 @@
         <entry key="..\:/Users/Senya/AndroidStudioProjects/Chesser/app/src/main/res/layout/settings_activity.xml" value="0.33" />
         <entry key="..\:/Users/Senya/AndroidStudioProjects/Chesser/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.178125" />
         <entry key="..\:/Users/Senya/AndroidStudioProjects/Chesser/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3536458333333333" />
+        <entry key="..\:/Users/Senya_Zakharov/AndroidStudioProjects/Chesser/app/src/main/res/layout/activity_act_for_save.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Senya_Zakharov/AndroidStudioProjects/Chesser/app/src/main/res/layout/activity_all_openings.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Senya_Zakharov/AndroidStudioProjects/Chesser/app/src/main/res/layout/activity_login.xml" value="0.17300724637681159" />
         <entry key="..\:/Users/Senya_Zakharov/AndroidStudioProjects/Chesser/app/src/main/res/layout/activity_main.xml" value="0.17300724637681159" />
         <entry key="..\:/Users/Senya_Zakharov/AndroidStudioProjects/Chesser/app/src/main/res/layout/activity_openings.xml" value="0.17300724637681159" />

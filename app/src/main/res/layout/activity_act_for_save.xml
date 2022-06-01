@@ -36,4 +36,22 @@
         android:text="Go To Saved Positions"
         app:layout_constraintTop_toBottomOf="@+id/nameOfSave"
         tools:layout_editor_absoluteX="134dp" />
+
+    <Button
+        android:id="@+id/ClearPNG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Clear"
+        app:layout_constraintTop_toBottomOf="@+id/go"
+        tools:layout_editor_absoluteX="148dp" />
+
+    <Button
+        android:id="@+id/infoAboutOpening"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Openings"
+        app:layout_constraintTop_toBottomOf="@+id/ClearPNG"
+        tools:layout_editor_absoluteX="148dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
