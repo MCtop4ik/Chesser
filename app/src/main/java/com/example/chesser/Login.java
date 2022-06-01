@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
                     if (mSettings.getString("Name", "").equals(login.getText().toString())
                     && mSettings.getString("Password", "").equals(password.getText().toString())){
                         infoLogin = login.getText().toString();
-                        started = new Intent(Login.this, Main.class);
+                        started = new Intent(Login.this, MainUser.class);
                         startActivity(started);
                     }
                 }else{

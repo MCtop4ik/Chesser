@@ -39,6 +39,8 @@ class Desk {
         fen = fen.replace("7", "       ");
         fen = fen.replace("8", "        ");
         fen = fen.replace("/", "");
+        fen = fen.replace("w", "");
+        fen = fen.replace("b", "");
         int countToEight = -1;
         int j = 0;
         for (int i = 0; i < 63; i++){
@@ -49,7 +51,8 @@ class Desk {
                 countToEight += 1;
             }
             if (!String.valueOf(fen.charAt(i)).equals(" ")){
-                boardArray[j][countToEight] = String.valueOf(fen.charAt(i));}else{
+                boardArray[j][countToEight] = String.valueOf(fen.charAt(i));
+            }else{
                 boardArray[j][countToEight] = "";
             }
         }
