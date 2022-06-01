@@ -14,11 +14,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Codes extends AppCompatActivity {
     SharedPreferences mSettings;
     Intent open;
     private SQLiteDatabase myDb;
+    public static ArrayList<String> gameList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mSettings = getSharedPreferences(MyConstants.APP_PREFERENCES, Context.MODE_PRIVATE);
@@ -74,9 +76,8 @@ public class Codes extends AppCompatActivity {
 
     }
     public void savePosition(){
-        Cursor cursor = myDb.rawQuery("INSERT INTO games (name, fen) " +
+        myDb.execSQL("INSERT INTO games (name, fen) " +
                 "VALUES ('Russian Defence', 'rnb1kb1r/ppp1qppp/3p4/8/4n3/5N2/PPPPQPPP/RNB1KB1R')",null);
-        cursor.close();
         Cursor cursor1 = myDb.rawQuery("SELECT * FROM games where `id` = '2'",null);
         cursor1.moveToFirst();
         String user = cursor1.getString(1);
