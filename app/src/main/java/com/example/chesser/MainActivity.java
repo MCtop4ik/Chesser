@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                 eco = cursor.getString(1);
                 name = cursor.getString(2);
             }
-
             cursor.close();
         }
     }

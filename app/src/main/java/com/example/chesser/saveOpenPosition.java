@@ -30,7 +30,6 @@ public class saveOpenPosition extends ListActivity {
         pgnList.clear();
         openingList.clear();
         if (!actForSave.labelGame.equals(""))savePosition();
-        System.out.println(actForSave.labelGame);
         fillAllGames();
         ArrayAdapter<String> gameAdapter =
                 new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
@@ -41,7 +40,9 @@ public class saveOpenPosition extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Desk d = new Desk();
-        d.convertFen(fenList.get(position));
+        String fen = fenList.get(position);
+        d.convertFen(fen);
+        d.printBoard();
         MainActivity.name = openingList.get(position);
         NotationHelper.pgn = pgnList.get(position);
         Intent open;
